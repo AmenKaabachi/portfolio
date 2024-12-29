@@ -105,7 +105,7 @@ body {
 }
 
 .contact-section {
-    background: url('images/about-background.png') no-repeat center center/cover; /* Background image */
+    background: url('images/about-background.png') no-repeat center center/cover; /* Match background image with About section */
     color: #fff; /* Light text color */
     padding: 20px 0;
     border-radius: 0; /* Remove rounded edges */
