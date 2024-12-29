@@ -114,7 +114,7 @@
                     <img src="images/vscode-logo.svg" alt="VS Code" class="skill-logo">
                     <p>VS Code</p>
                 </div>
-                <div class="skill-container">
+                <div class=" skill-container">
                     <img src="images/netbeans-logo.svg" alt="NetBeans" class="skill-logo">
                     <p>NetBeans</p>
                 </div>
@@ -131,42 +131,65 @@
     <div class="section-title">
         <h2>Projects</h2>
     </div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="project text-white">
-            <img src="images/chat-logo.png" alt="Chat Logo" class="project-logo" style="width: 120px; height: 120px;"> 
-            <h3>Development of an Online Chat Application</h3>
-            <p>Creation of a real-time web chat application and a responsive front-end.</p>
-            <div class="skills-icons">
-                <img src="images/html-logo.svg" alt="HTML" class="skill-logo">
-                <img src="images/css-logo.svg" alt="CSS" class="skill-logo">
-                <img src="images/php-logo.svg" alt="PHP" class="skill-logo">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-dark bg-light mb-3">
+                <div class="card-header">
+                    <img src="images/chat-logo.png" alt="Chat Logo" class="card-img-top project-logo">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Development of an Online Chat Application</h5>
+                    <p class="card-text">Creation of a real-time web chat application and a responsive front-end.</p>
+                    <div class="skills-icons">
+                        <img src="images/html-logo.svg" alt="HTML" class="skill-logo">
+                        <img src="images/css-logo.svg" alt="CSS" class="skill-logo">
+                        <img src="images/php-logo.svg" alt="PHP" class="skill-logo">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="project text-white">
-            <img src="images/openai-logo.jpg" alt="OpenAI Logo" class="project-logo">
-            <h3>Development of a ChatGPT-like Application</h3>
-            <p>Integration of the ChatGPT API into a C# application to create a ChatGPT clone.</p>
-            <div class="skills-icons">
-                <img src="images/csharp-logo.svg" alt="C#" class="skill-logo">
+        <div class="col-md-4">
+            <div class="card text-dark bg-light mb-3">
+                <div class="card-header">
+                    <img src="images/openai-logo.jpg" alt="OpenAI Logo" class="card-img-top project-logo">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Development of a ChatGPT-like Application</h5>
+                    <p class="card-text">Integration of the ChatGPT API into a C# application to create a ChatGPT clone.</p>
+                    <div class="skills-icons">
+                        <img src="images/csharp-logo.svg" alt="C#" class="skill-logo">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
+        <div class="col-md-4">
+            <div class="card text-dark bg-light mb-3">
+                <div class="card-header">
+                    <img src="images/toyshop-logo.jpg" alt="Toyshop Logo" class="card-img-top project-logo">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Development of a Toyshop</h5>
+                    <p class="card-text">An e-commerce site for buying toys. Features include product listings, shopping cart, and checkout process.</p>
+                    <div class="skills-icons">
+                        <img src="images/java-logo.svg" alt="Java" class="skill-logo">
+                        <img src="images/html-logo.svg" alt="HTML" class="skill-logo">
+                        <img src="images/css-logo.svg" alt="CSS" class="skill-logo">
+                        <img src="images/javascript-logo.svg" alt="JavaScript" class="skill-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <!-- Contact Section -->
 <div class="contact-section scroll-element" id="contact" style="background: url('images/about-background.png') no-repeat center center/cover; border-radius: 0;"> 
     <div class="row text-light py-4">
-        <div class="col-md-6 contact-item">
-            <p><i class="fas fa-envelope"></i> kaabachiamen@gmail.com</p>
-            <p><i class="fab fa-linkedin"></i> linkedin.com/in/amen-kaabachi</p>
-            <p><i class="fab fa-github"></i> github.com/amen-kaabachi</p>
-            <p><i class="fas fa-phone"></i> +216 99 841 331</p>
+        <div class="col-md-6">
+            <p style="font-size: 1.5rem;"><i class="fas fa-envelope"></i> kaabachiamen@gmail.com</p>
+            <p style="font-size: 1.5rem;"><i class="fab fa-linkedin"></i> linkedin.com/in/amen-kaabachi</p>
+            <p style="font-size: 1.5rem;"><i class="fab fa-github"></i> github.com/amen-kaabachi</p>
+            <p style="font-size: 1.5rem;"><i class="fas fa-phone"></i> +216 99 841 331</p>
         </div>
         <div class="col-md-6">
             <form>
@@ -178,13 +201,7 @@
                     <label for="message" style="font-size: 1.5rem;">Message</label>
                     <textarea class="form-control" id="message" rows="5" placeholder="Enter your message"></textarea>
                 </div>
-                <button type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="22" y1="2" x2="11" y2="13"></line>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                    </svg>
-                    Send
-                </button>
+                <button type="submit" class="btn btn-primary" style="font-size: 1.5rem;">Send</button>
             </form>
         </div>
     </div>
