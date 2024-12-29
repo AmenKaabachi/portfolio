@@ -4,7 +4,7 @@ body {
     font-family: 'Andale Mono', monospace;
     line-height: 1.6;
     margin: 0;
-    padding: 20px;
+    padding: 0; /* Remove padding to avoid white margins */
     background-color: #0b2545; /* Dark background color */
     color: #eef4ed; /* Light text color */
 }
@@ -14,11 +14,18 @@ body {
     left: 0; /* Ensure the navbar starts from the left edge */
     width: 100%;
     z-index: 1000;
-    background-color: #13315c; /* Navbar background color */
-    border-bottom: 2px solid #8da9c4; /* Add border to match the theme */
+    background-color: transparent; /* Make the navbar transparent */
+    border-bottom: none; /* Remove border */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Smooth transition for color change */
+}
+.navbar.scrolled {
+    background-color: #fff; /* Change navbar background to white when scrolled */
 }
 .navbar-brand, .nav-link {
     color: #eef4ed !important; /* Navbar text color */
+}
+.navbar.scrolled .navbar-brand, .navbar.scrolled .nav-link {
+    color: #0b2545 !important; /* Navbar text color when scrolled */
 }
 .nav-link:hover {
     color: #8da9c4 !important; /* Navbar link hover color */
@@ -33,14 +40,14 @@ body {
     padding-top: 80px; /* Add padding to avoid content being hidden behind the fixed navbar */
 }
 .section-title {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     color: #eef4ed;
-    font-size: 1.5rem;
+    font-size: 5rem;
     font-weight: bold;
     text-transform: uppercase;
     border-bottom: 2px solid #eef4ed;
-    padding-bottom: 10px;
-}
+    padding-bottom: 15px;
+}   
 
 .section-content {
     background: #13315c; /* Slightly different dark container background */
@@ -53,18 +60,17 @@ body {
 .skills, .projects {
     margin: 20px 0;
 }
-/* Updated mode-switch styles */
-.mode-switch {
+/* Remove mode-switch styles */
+/* .mode-switch {
     position: absolute;
-    top: 60px; /* Lower the button further */
+    top: 60px; 
     right: 20px;
-    background: #8da9c4; /* Accent color for switch */
+    background: #8da9c4; 
     color: #000000;
     border: none;
     padding: 10px;
     cursor: pointer;
     border-radius: 5px;
-    /* Bootstrap classes */
     display: inline-block;
     font-weight: 400;
     text-align: center;
@@ -77,23 +83,7 @@ body {
     line-height: 1.5;
     border-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-body.light-mode {
-    background-color: #eef4ed; /* Light background color */
-    color: #0b2545; /* Dark text color */
-}
-body.light-mode .container {
-    background: #8da9c4; /* Light container background */
-}
-body.light-mode .mode-switch {
-    background: #0b2545;
-    color: #eef4ed;
-}
-body.light-mode .section-content {
-    background: #eef4ed; /* Slightly different light container background */
-    color: #0b2545;
-}
-
+} */
 .project-logo {
     width: 80px;
     height: 80px;
@@ -115,11 +105,11 @@ body.light-mode .section-content {
 }
 
 .contact-section {
-    background-color: #8da9c4; /* Match the light container background color */
-    color: #0b2545; /* Dark text color */
+    background: url('images/about-background.png') no-repeat center center/cover; /* Background image */
+    color: #fff; /* Light text color */
     padding: 20px 0;
-    border-radius: 10px; /* Rounded edges */
-    margin-top: 20px; /* Space between it and the main container */
+    border-radius: 0; /* Remove rounded edges */
+    margin-top: 0; /* Remove margin */
 }
 .contact-item {
     flex: 1;
@@ -132,4 +122,166 @@ body.light-mode .section-content {
 .contact-section p {
     margin: 0;
     padding: 10px 0;
+}
+
+.about-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('images/about-background.png') no-repeat center center/cover;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    margin: 0; /* Remove margins to avoid white spaces */
+}
+
+.about-section .container {
+    height: 100%;
+}
+
+.about-section .row {
+    height: 100%;
+}
+
+.about-section .col-md-6 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.skills-section {
+    width: 100%;
+    height: 100vh;
+    background-color: #f0f0f0; /* Slightly off-white background */
+    color: #0b2545; /* Dark text color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.skills-content {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px; /* Reduce gap for better spacing */
+    justify-items: center;
+    align-items: center;
+}
+
+.skills-group {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.skills-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Reduce gap for better spacing */
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px; /* Minimum width */
+    min-height: 100px; /* Minimum height */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    flex-grow: 1; /* Allow the container to grow */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.skill-container:hover {
+    transform: translateY(-10px); /* Move up on hover */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+.skill-logo {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+.skills-section .row {
+    width: 100%;
+    height: 50%;
+}
+
+.skills-section .col-md-6 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.projects-section {
+    width: 100%;
+    height: 100vh;
+    background: url('images/projects-background.png') no-repeat center center/cover; /* Background image */
+    color: #0b2545; /* Dark text color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Ensure the text font size in the Skills section matches the Projects section */
+.skills-group h3, .skills-group p {
+    font-size: 1.2rem; /* Match the font size */
+}
+
+/* Adjust the title "My Skills" to be a little bit lower */
+.skills-section .section-title {
+    margin-top: 20px; /* Add margin to lower the title */
+}
+
+.scroll-element {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-element.scrolled {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #0b2545;
+    color: #eef4ed;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
 }

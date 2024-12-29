@@ -11,7 +11,7 @@
 
 <body>
     <!-- Bootstrap Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">Amen KAABACHI</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,99 +33,145 @@
             </ul>
         </div>
     </nav>
-    <div class="container mt-4">
-        <!-- Header -->
-        <div class="header text-center mb-4">
-            <h1>Amen KAABACHI</h1>
-            <h2>Business Computing Student</h2>
-        </div>
 
-        <!-- Switch Mode Button -->
-        <div class="text-right mb-4">
-            <button class="mode-switch btn btn-secondary">Switch Mode</button>
-        </div>
-
-        <!-- About Section -->
-        <div class="row mb-4" id="about">
-            <div class="col-12">
-                <div class="section-title">
-                    <h2>About Me</h2>
+    <!-- About Section -->
+    <div class="about-section scroll-element" id="about">
+        <div class="row w-100">
+            <div class="col-md-6 text-light d-flex flex-column justify-content-center align-items-start">
+                <h1 class="text-left ml-5" style="font-size: 3rem; margin-top: 50px;">Hi, My name is Amen Kaabachi</h1>
+                <p class="text-left ml-5" style="font-size: 1.2rem;">Passionate about software development and solving complex problems. I am currently in my 3rd year of studies in Business Computing specializing in Business Information System (BIS) as a Business Computing Student. I am motivated and good at handling difficult problems.</p>
+            </div>  
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                <img src="images/my-photo.jpg" alt="Amen KAABACHI" class="img-thumbnail rounded" style="width: 550px; height: 550px;">
+            </div>
+        </div>  
+    </div>
+  <div class="skills-section scroll-element" id="skills" style="background-color: #f0f0f0;">
+    <div class="section-title" style="color: rgb(8, 3, 3);">
+        <h2 style="font-size: 3rem; font-weight: bold;">My Skills</h2>
+    </div>
+    <div class="skills-content">
+        <div class="skills-group" style="margin-bottom: 50px;">
+            <h3 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">Programming Languages</h3>
+            <div class="skills-icons" style="margin-bottom: 20px;">
+                <div class="skill-container">
+                    <img src="images/java-logo.svg" alt="Java" class="skill-logo">
+                    <p>Java</p>
                 </div>
-                <div class="section-content d-flex">
-                    <div class="about-text w-50">
-                        <h3>Amen KAABACHI</h3>
-                        <p>Passionate about software development and solving complex problems. I am currently in my 3rd year of studies in Business Computing specializing in Business Information System (BIS). I am motivated and good at handling difficult problems.</p>
-                    </div>
-                    <div class="about-image w-50">
-                        <img src="images/my-photo.jpg" alt="Amen KAABACHI" class="img-fluid">
-                    </div>
+                <div class="skill-container">
+                    <img src="images/python-logo.svg" alt="Python" class="skill-logo">
+                    <p>Python</p>
+                </div>
+                <div class="skill-container">
+                    <img src="images/c-logo.svg" alt="C" class="skill-logo">
+                    <p>C</p>
+                </div>
+                <div class="skill-container">
+                    <img src="images/csharp-logo.svg" alt="C#" class="skill-logo">
+                    <p>C#</p>
                 </div>
             </div>
         </div>
-        
-        <!-- Skills Section -->
-        <div class="row mb-4" id="skills">
-            <div class="col-12">
-                <div class="section-title">
-                    <h2>Technical Skills</h2>
+
+        <div class="skills-group" style="margin-bottom: 50px;">
+            <h3 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">Web Development</h3>
+            <div class="skills-icons" style="margin-bottom: 20px;">
+                <div class="skill-container">
+                    <img src="images/html-logo.svg" alt="HTML" class="skill-logo">
+                    <p>HTML</p>
                 </div>
-                <div class="section-content">
-                    <ul>
-                        <li>Programming Languages: Java, Python, , C,C#</li>
-                        <li>Web Development: HTML, CSS, JavaScript , PHP</li>
-                        <li>Database Management: MySQL</li>
-                        <li>Tools & Technologies: Git, VS Code, NetBeans, Visual Studio</li>
-                    </ul>
+                <div class="skill-container">
+                    <img src="images/css-logo.svg" alt="CSS" class="skill-logo">
+                    <p>CSS</p>
+                </div>
+                <div class="skill-container">
+                    <img src="images/javascript-logo.svg" alt="JavaScript" class="skill-logo">
+                    <p>JavaScript</p>
+                </div>
+                <div class="skill-container">
+                    <img src="images/php-logo.svg" alt="PHP" class="skill-logo">
+                    <p>PHP</p>
                 </div>
             </div>
         </div>
-        
-        <!-- Projects Section -->
-        <div class="row mb-4" id="projects">
-            <div class="col-12">
-                <div class="section-title">
-                    <h2>Projects</h2>
+        <div class="skills-group" style="margin-bottom: 50px;">
+            <h3 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">Database Management</h3>
+            <div class="skills-icons" style="margin-bottom: 20px;">
+                <div class="skill-container">
+                    <img src="images/mysql-logo.svg" alt="MySQL" class="skill-logo">
+                    <p>MySQL</p>
                 </div>
-                <div class="section-content">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="project">
-                                <img src="images/chat-logo.png" alt="Chat Logo" class="project-logo">
-                                <h3>Développement d'une application de chat en ligne</h3>
-                                <p>Création d'une application web de chat en temps réel et un front-end responsive.</p>
-                                <p>Technologies : HTML, CSS, PHP</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="project">
-                                <img src="images/openai-logo.jpg" alt="OpenAI Logo" class="project-logo">
-                                <h3>Développement d'une application similaire à ChatGPT</h3>
-                                <p>Intégration de l'API de ChatGPT dans une application C# pour créer un clone de ChatGPT.</p>
-                                <p>Technologies : C#</p>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        </div>
+        <div class="skills-group" style="margin-bottom: 50px;">
+            <h3 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">Tools & Technologies</h3>
+            <div class="skills-icons" style="margin-bottom: 20px;">
+                <div class="skill-container">
+                    <img src="images/git-logo.svg" alt="Git" class="skill-logo">
+                    <p>Git</p>
+                </div>
+                <div class="skill-container">
+                    <img src="images/vscode-logo.svg" alt="VS Code" class="skill-logo">
+                    <p>VS Code</p>
+                </div>
+                <div class="skill-container">
+                    <img src="images/netbeans-logo.svg" alt="NetBeans" class="skill-logo">
+                    <p>NetBeans</p>
+                </div>
+                <div class="skill-container">
+                    <img src="images/visualstudio-logo.svg" alt="Visual Studio" class="skill-logo">
+                    <p>Visual Studio</p>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
+<div class="projects-section scroll-element" id="projects" style="background-image: url('images/projects-background.png'); background-size: cover; background-position: center;">
+    <div class="section-title">
+        <h2>Projects</h2>
+    </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="project text-white">
+            <img src="images/chat-logo.png" alt="Chat Logo" class="project-logo" style="width: 120px; height: 120px;"> 
+            <h3>Development of an Online Chat Application</h3>
+            <p>Creation of a real-time web chat application and a responsive front-end.</p>
+            <div class="skills-icons">
+                <img src="images/html-logo.svg" alt="HTML" class="skill-logo">
+                <img src="images/css-logo.svg" alt="CSS" class="skill-logo">
+                <img src="images/php-logo.svg" alt="PHP" class="skill-logo">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="project text-white">
+            <img src="images/openai-logo.jpg" alt="OpenAI Logo" class="project-logo">
+            <h3>Development of a ChatGPT-like Application</h3>
+            <p>Integration of the ChatGPT API into a C# application to create a ChatGPT clone.</p>
+            <div class="skills-icons">
+                <img src="images/csharp-logo.svg" alt="C#" class="skill-logo">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
     <!-- Contact Section -->
-    <div class="contact-section" id="contact">
-        <div class="container-fluid bg-dark text-light py-4">
-            <div class="row text-center">
-                <div class="col-md-3">
-                    <p><i class="fas fa-envelope"></i> kaabachiamen@gmail.com</p>
-                </div>
-                <div class="col-md-3">
-                    <p><i class="fab fa-linkedin"></i> linkedin.com/in/amen-kaabachi</p>
-                </div>
-                <div class="col-md-3">
-                    <p><i class="fab fa-github"></i> github.com/amen-kaabachi</p>
-                </div>
-                <div class="col-md-3">
-                    <p><i class="fas fa-phone"></i> +216 99 841 331</p>
-                </div>
+<div class="contact-section scroll-element" id="contact" style="background: url('images/projects-background.png') no-repeat center center/cover; border-radius: 0;"> 
+        <div class="row text-center text-light py-4">
+            <div class="col-md-3">
+                <p><i class="fas fa-envelope"></i> kaabachiamen@gmail.com</p>
+            </div>
+            <div class="col-md-3">
+                <p><i class="fab fa-linkedin"></i> linkedin.com/in/amen-kaabachi</p>
+            </div>
+            <div class="col-md-3">
+                <p><i class="fab fa-github"></i> github.com/amen-kaabachi</p>
+            </div>
+            <div class="col-md-3">
+                <p><i class="fas fa-phone"></i> +216 99 841 331</p>
             </div>
         </div>
     </div>
