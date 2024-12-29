@@ -1,28 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Europa:wght@400;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Andale Mono', monospace;
     line-height: 1.6;
     margin: 0;
     padding: 20px;
-    background-color: #393646; /* Dark background color */
-    color: #f4eee0; /* Light text color */
+    background-color: #0b2545; /* Dark background color */
+    color: #eef4ed; /* Light text color */
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0; /* Ensure the navbar starts from the left edge */
+    width: 100%;
+    z-index: 1000;
+    background-color: #13315c; /* Navbar background color */
+    border-bottom: 2px solid #8da9c4; /* Add border to match the theme */
+}
+.navbar-brand, .nav-link {
+    color: #eef4ed !important; /* Navbar text color */
+}
+.nav-link:hover {
+    color: #8da9c4 !important; /* Navbar link hover color */
 }
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    background: #4f4557; /* Dark container background */
+    background: #134074; /* Dark container background */
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding-top: 80px; /* Add padding to avoid content being hidden behind the fixed navbar */
 }
 .section-title {
     margin-bottom: 20px;
-    color: #f4eee0;
+    color: #eef4ed;
     font-size: 1.5rem;
     font-weight: bold;
     text-transform: uppercase;
-    border-bottom: 2px solid #f4eee0;
+    border-bottom: 2px solid #eef4ed;
     padding-bottom: 10px;
 }
+
+.section-content {
+    background: #13315c; /* Slightly different dark container background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    color: #eef4ed;
+}
+
 .skills, .projects {
     margin: 20px 0;
 }
@@ -31,7 +58,7 @@ body {
     position: absolute;
     top: 60px; /* Lower the button further */
     right: 20px;
-    background: #6d5d6e; /* Accent color for switch */
+    background: #8da9c4; /* Accent color for switch */
     color: #000000;
     border: none;
     padding: 10px;
@@ -52,13 +79,57 @@ body {
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 body.light-mode {
-    background-color: #f4eee0; /* Light background color */
-    color: #393646; /* Dark text color */
+    background-color: #eef4ed; /* Light background color */
+    color: #0b2545; /* Dark text color */
 }
 body.light-mode .container {
-    background: #e0d4c8; /* Light container background */
+    background: #8da9c4; /* Light container background */
 }
 body.light-mode .mode-switch {
-    background: #393646;
-    color: #f4eee0;
+    background: #0b2545;
+    color: #eef4ed;
+}
+body.light-mode .section-content {
+    background: #eef4ed; /* Slightly different light container background */
+    color: #0b2545;
+}
+
+.project-logo {
+    width: 80px;
+    height: 80px;
+    display: block;
+    margin: 0 auto 10px;
+}
+.project {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.about-text {
+    padding-right: 20px;
+}
+.about-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.contact-section {
+    background-color: #8da9c4; /* Match the light container background color */
+    color: #0b2545; /* Dark text color */
+    padding: 20px 0;
+    border-radius: 10px; /* Rounded edges */
+    margin-top: 20px; /* Space between it and the main container */
+}
+.contact-item {
+    flex: 1;
+    text-align: center;
+}
+.contact-item p {
+    margin: 0;
+    padding: 10px 0;
+}
+.contact-section p {
+    margin: 0;
+    padding: 10px 0;
 }
