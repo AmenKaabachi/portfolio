@@ -129,11 +129,80 @@ body {
 
 .contact-section p, .contact-section a {
     color: #fff; /* Ensure text color is white */
+    font-size: 1.2rem; /* Make the font size smaller */
 }
 
 .contact-section form {
     flex: 1; /* Take less space for the form */
     margin-top: 20px; /* Add space between form and contact information */
+}
+
+/* Adjust row spacing */
+.contact-section .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem; /* Add space between the two containers */
+    justify-content: space-between; /* Ensure the containers are spaced out */
+}
+
+/* Style for contact information */
+.contact-info {
+    flex: 1; /* Ensure the contact info takes up equal space */
+    order: 1; /* Ensure the contact info is on the left */
+}
+
+.contact-info p {
+    font-size: 1.25rem; /* Increase font size */
+    margin-bottom: 1rem; /* Add space between lines */
+    line-height: 1.6; /* Improve readability */
+}
+
+/* Style for the contact form */
+.contact-form {
+    flex: 1; /* Ensure the contact form takes up equal space */
+    order: 2; /* Ensure the contact form is on the right */
+    font-size: 1.1rem;
+}
+
+/* Form input and textarea */
+.contact-form .form-control {
+    font-size: 1rem;
+    padding: 0.75rem; /* Increase padding for better input visibility */
+    margin-bottom: 1.5rem; /* Add space between form fields */
+    border-radius: 0.5rem; /* Rounded corners */
+    border: 1px solid #ddd; /* Subtle border */
+}
+
+/* Submit button styling */
+.submit-message {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: #fff;
+    font-size: 1.25rem;
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center; /* Center the text */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.submit-message:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-info, .contact-form {
+        flex: 100%; /* Stack vertically on smaller screens */
+        order: initial; /* Reset order for smaller screens */
+    }
+
+    .contact-info p {
+        font-size: 1.1rem; /* Slightly smaller text for smaller screens */
+    }
 }
 
 button {
@@ -174,6 +243,56 @@ button:active {
 button svg {
     width: 1.25rem;
     height: 1.25rem;
+}
+
+button.submit-message {
+    --color: #00bfa6; /* Cyan close to green */
+    font-family: inherit;
+    display: inline-block;
+    width: 8em;
+    height: 2.6em;
+    line-height: 2.5em;
+    margin: 20px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid var(--color);
+    transition: color 0.5s;
+    z-index: 1;
+    font-size: 17px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: var(--color);
+}
+
+button.submit-message:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: var(--color);
+    height: 150px;
+    width: 200px;
+    border-radius: 50%;
+}
+
+button.submit-message:hover {
+    color: #fff;
+}
+
+button.submit-message:before {
+    top: 100%;
+    left: 100%;
+    transition: all 0.7s;
+}
+
+button.submit-message:hover:before {
+    top: -30px;
+    left: -30px;
+}
+
+button.submit-message:active:before {
+    background: #3a0ca3;
+    transition: background 0s;
 }
 
 .button {
@@ -290,7 +409,7 @@ button svg {
 
 .skills-section {
     width: 100%;
-    height: 100vh;
+    height: auto; /* Adjust height to fit content */
     background-color: #f0f0f0; /* Slightly off-white background */
     color: #0b2545; /* Dark text color */
     display: flex;
@@ -299,21 +418,20 @@ button svg {
     justify-content: center;
     text-align: center;
     padding: 20px;
+    padding-bottom: 20px; /* Reduce padding to the bottom */
 }
 
 .skills-content {
     width: 100%;
-    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 20px; /* Reduce gap for better spacing */
+    gap: 5px; /* Reduce gap for better spacing */
     justify-items: center;
     align-items: center;
 }
 
 .skills-group {
-    padding: 20px;
+    padding: 5px; /* Reduce padding */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -323,7 +441,7 @@ button svg {
 .skills-icons {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Reduce gap for better spacing */
+    gap: 5px; /* Reduce gap for better spacing */
     width: 100%;
     align-items: center;
     justify-content: center;
