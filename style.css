@@ -82,8 +82,8 @@ body {
 }
 
 .contact-section {
-    background: url('images/about-background.png') no-repeat center center/cover;
-    color: #fff;
+    background-color: #f0f0f0; /* Match the skills section background color */
+    color: #0b2545; /* Dark text color to match the skills section */
     padding: 20px 0;
     border-radius: 0;
     margin-top: 0;
@@ -128,7 +128,7 @@ body {
 }
 
 .contact-section p, .contact-section a {
-    color: #fff; /* Ensure text color is white */
+    color: #0b2545; /* Change text color to dark */
     font-size: 1.2rem; /* Make the font size smaller */
 }
 
@@ -157,6 +157,32 @@ body {
     line-height: 1.6; /* Improve readability */
 }
 
+.contact-info a {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for transform and background color */
+}
+
+.contact-info a:hover {
+    transform: scale(1.2); /* Scale up the icon */
+    background-color: #007bff; /* Change background color on hover */
+}
+
+.contact-info a i {
+    color: black; /* Default icon color */
+    transition: color 0.3s ease; /* Smooth transition for color */
+}
+
+.contact-info a:hover i {
+    color: white; /* Change icon color on hover */
+}
+
 /* Style for the contact form */
 .contact-form {
     flex: 1; /* Ensure the contact form takes up equal space */
@@ -171,6 +197,7 @@ body {
     margin-bottom: 1.5rem; /* Add space between form fields */
     border-radius: 0.5rem; /* Rounded corners */
     border: 1px solid #ddd; /* Subtle border */
+    width: calc(100% - 20px); /* Increase width to align with the send button */
 }
 
 /* Submit button styling */
@@ -294,14 +321,15 @@ button svg {
 }
 
 button.submit-message {
-    --color: #00bfa6; /* Cyan close to green */
+    --color: #6c757d; /* Grey color */
     font-family: inherit;
     display: inline-block;
     width: 8em;
     height: 2.6em;
     line-height: 2.5em;
-    margin: 20px;
+    margin: 20px 0; /* Adjust margin to align with form inputs */
     position: relative;
+    left: 0; /* Align with form inputs */
     cursor: pointer;
     overflow: hidden;
     border: 2px solid var(--color);
@@ -339,7 +367,7 @@ button.submit-message:hover:before {
 }
 
 button.submit-message:active:before {
-    background: #3a0ca3;
+    background: #0c1ea3;
     transition: background 0s;
 }
 
@@ -430,7 +458,7 @@ button.submit-message:active:before {
     position: relative;
     width: 100%;
     height: 100vh;
-    background: url('images/about-background.png') no-repeat center center/cover;
+    background: url('images/projects-background.png') no-repeat center center/cover;
     color: #fff;
     display: flex;
     align-items: center;
@@ -629,4 +657,10 @@ button.submit-message:active:before {
 .back-to-top.visible {
     opacity: 1;
     visibility: visible;
+}
+
+.row.text-light.py-4 {
+    width: 100%; /* Make the row take full width */
+    max-width: 1200px; /* Set a maximum width for better alignment */
+    margin: 0 auto; /* Center the row */
 }
