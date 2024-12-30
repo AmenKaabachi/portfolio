@@ -203,6 +203,54 @@ body {
     .contact-info p {
         font-size: 1.1rem; /* Slightly smaller text for smaller screens */
     }
+
+    .about-section .col-md-6 {
+        flex: 100%; /* Stack vertically on smaller screens */
+        text-align: center; /* Center text on smaller screens */
+    }
+
+    .about-section .col-md-6 img {
+        width: 100%; /* Make image responsive */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .skills-section .section-title {
+        font-size: 2rem; /* Adjust font size for smaller screens */
+    }
+
+    .skills-group h3 {
+        font-size: 1.5rem; /* Adjust font size for smaller screens */
+    }
+
+    .skills-icons {
+        flex-direction: column; /* Stack icons vertically on smaller screens */
+    }
+
+    .projects-section .section-title {
+        font-size: 2rem; /* Adjust font size for smaller screens */
+    }
+
+    .card {
+        width: 100%; /* Make card responsive */
+        margin-bottom: 20px; /* Add space between cards */
+    }
+
+    .contact-section .row {
+        flex-direction: column; /* Stack contact info and form vertically */
+    }
+
+    .contact-info, .contact-form {
+        flex: 100%; /* Take full width on smaller screens */
+        margin-bottom: 20px; /* Add space between contact info and form */
+    }
+
+    .contact-info p {
+        font-size: 1rem; /* Adjust font size for smaller screens */
+    }
+
+    .submit-message {
+        width: 100%; /* Make button full width */
+    }
 }
 
 button {
