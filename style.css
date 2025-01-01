@@ -8,6 +8,7 @@ body {
     background-color: #0b2545; /* Dark background color */
     color: #eef4ed; /* Light text color */
 }
+
 .navbar {
     position: fixed;
     top: 0;
@@ -18,15 +19,19 @@ body {
     border-bottom: none; /* Remove border */
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Smooth transition for color change */
 }
+
 .navbar.scrolled {
     background-color: #fff; /* Change navbar background to white when scrolled */
 }
+
 .navbar-brand, .nav-link {
     color: #eef4ed !important; /* Navbar text color */
 }
+
 .navbar.scrolled .navbar-brand, .navbar.scrolled .nav-link {
     color: #0b2545 !important; /* Navbar text color when scrolled */
 }
+
 .nav-link:hover {
     color: #8da9c4 !important; /* Navbar link hover color */
 }
@@ -40,9 +45,9 @@ body {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -5px;
+    bottom: -0.3rem;
     width: 100%;
-    height: 4px;
+    height: 0.25rem;
     background-color: rgba(30, 85, 168, 0.466);
     transform: scaleX(0);
     transform-origin: right;
@@ -55,69 +60,76 @@ body {
 }
 
 .container {
-    max-width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 62.5rem;
     margin: 0 auto;
     background: #134074; /* Dark container background */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    padding-top: 80px; /* Add padding to avoid content being hidden behind the fixed navbar */
+    padding: 1.875rem;
+    border-radius: 0.625rem;
+    box-shadow: 0 0 0.625rem rgba(0,0,0,0.1);
+    padding-top: 5rem; /* Add padding to avoid content being hidden behind the fixed navbar */
 }
+
 .section-title {
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
     color: #eef4ed;
     font-size: 5rem;
     font-weight: bold;
     text-transform: uppercase;
-    border-bottom: 2px solid #eef4ed;
-    padding-bottom: 15px;
+    border-bottom: 0.125rem solid #eef4ed;
+    padding-bottom: 0.9375rem;
 }   
 
 .section-content {
     background: #13315c; /* Slightly different dark container background */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 1.25rem;
+    border-radius: 0.625rem;
+    box-shadow: 0 0 0.625rem rgba(0,0,0,0.1);
     color: #eef4ed;
 }
 
 .skills, .projects {
-    margin: 20px 0;
+    margin: 1.25rem 0;
 }
 
 .project-logo {
-    width: 80px;
-    height: 80px;
+    width: 5vw;
+    height: 5vw;
     display: block;
-    margin: 0 auto 10px;
+    margin: 0 auto 0.625rem;
 }
+
 .project {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 .about-text {
-    padding-right: 20px;
+    padding-right: 1.25rem;
 }
+
 .about-image img {
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 0.625rem;
 }
 
 .contact-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     background-color: #f0f0f0; /* Match the skills section background color */
     color: #0b2545; /* Dark text color to match the skills section */
-    padding: 20px 0;
+    padding: 1.25rem 0;
     border-radius: 0;
     margin-top: 0;
     opacity: 1; /* Default to visible */
     transform: translateY(0); /* Reset translation */
     transition: none; /* Remove animations if not needed */
     min-height: 70vh; /* Smaller height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .contact-section.scrolled {
@@ -126,14 +138,14 @@ body {
 }
 
 .contact-item {
-    flex: 2; /* Take more space for the contact information */
+    flex: 1 1 calc(50% - 1rem); /* Adjust for mobile */
     text-align: left; /* Align text to the left */
-    margin-right: 30px; /* Increase space between contact information and form */
+    margin-right: 1.875rem; /* Increase space between contact information and form */
 }
 
 .contact-item p {
     margin: 0;
-    padding: 10px 0;
+    padding: 0.625rem 0;
     display: flex;
     align-items: center; /* Align icon and text on the same line */
     font-size: 1.5rem; /* Increase font size */
@@ -143,12 +155,12 @@ body {
 }
 
 .contact-item p i {
-    margin-right: 10px; /* Space between icon and text */
+    margin-right: 0.625rem; /* Space between icon and text */
 }
 
 .contact-section p {
     margin: 0;
-    padding: 10px 0;
+    padding: 0.625rem 0;
 }
 
 .contact-section p, .contact-section a {
@@ -157,8 +169,8 @@ body {
 }
 
 .contact-section form {
-    flex: 1; /* Take less space for the form */
-    margin-top: 20px; /* Add space between form and contact information */
+    flex: 1 1 calc(50% - 1rem); /* Adjust for mobile */
+    margin-top: 1.25rem; /* Add space between form and contact information */
 }
 
 /* Adjust row spacing */
@@ -183,8 +195,8 @@ body {
 
 .contact-info a {
     display: inline-block;
-    width: 50px;
-    height: 50px;
+    width: 3.125rem;
+    height: 3.125rem;
     border-radius: 50%;
     background-color: transparent;
     display: flex;
@@ -221,7 +233,7 @@ body {
     margin-bottom: 1.5rem; /* Add space between form fields */
     border-radius: 0.5rem; /* Rounded corners */
     border: 1px solid #ddd; /* Subtle border */
-    width: calc(100% - 20px); /* Increase width to align with the send button */
+    width: calc(100% - 1.25rem); /* Increase width to align with the send button */
 }
 
 /* Submit button styling */
@@ -247,7 +259,7 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .contact-info, .contact-form {
-        flex: 100%; /* Stack vertically on smaller screens */
+        flex: 1 1 calc(100% - 1rem); /* Full width for smaller screens */
         order: initial; /* Reset order for smaller screens */
     }
 
@@ -283,7 +295,7 @@ body {
 
     .card {
         width: 100%; /* Make card responsive */
-        margin-bottom: 20px; /* Add space between cards */
+        margin-bottom: 1.25rem; /* Add space between cards */
     }
 
     .contact-section .row {
@@ -292,7 +304,7 @@ body {
 
     .contact-info, .contact-form {
         flex: 100%; /* Take full width on smaller screens */
-        margin-bottom: 20px; /* Add space between contact info and form */
+        margin-bottom: 1.25rem; /* Add space between contact info and form */
     }
 
     .contact-info p {
@@ -322,15 +334,15 @@ button {
     user-select: none;
     gap: 0.75rem;
     box-shadow:
-        0 4px 6px -1px #488aec31,
-        0 2px 4px -1px #488aec17;
+        0 0.25rem 0.375rem -0.0625rem #488aec31,
+        0 0.125rem 0.25rem -0.0625rem #488aec17;
     transition: all 0.6s ease;
 }
 
 button:hover {
     box-shadow:
-        0 10px 15px -3px #488aec4f,
-        0 4px 6px -2px #488aec17;
+        0 0.625rem 0.9375rem -0.1875rem #488aec4f,
+        0 0.25rem 0.375rem -0.125rem #488aec17;
 }
 
 button:focus,
@@ -351,16 +363,16 @@ button.submit-message {
     width: 8em;
     height: 2.6em;
     line-height: 2.5em;
-    margin: 20px 0; /* Adjust margin to align with form inputs */
+    margin: 1.25rem 0; /* Adjust margin to align with form inputs */
     position: relative;
     left: 0; /* Align with form inputs */
     cursor: pointer;
     overflow: hidden;
-    border: 2px solid var(--color);
+    border: 0.125rem solid var(--color);
     transition: color 0.5s;
     z-index: 1;
-    font-size: 17px;
-    border-radius: 6px;
+    font-size: 1.0625rem;
+    border-radius: 0.375rem;
     font-weight: 500;
     color: var(--color);
 }
@@ -370,8 +382,8 @@ button.submit-message:before {
     position: absolute;
     z-index: -1;
     background: var(--color);
-    height: 150px;
-    width: 200px;
+    height: 9.375rem;
+    width: 12.5rem;
     border-radius: 50%;
 }
 
@@ -386,8 +398,8 @@ button.submit-message:before {
 }
 
 button.submit-message:hover:before {
-    top: -30px;
-    left: -30px;
+    top: -1.875rem;
+    left: -1.875rem;
 }
 
 button.submit-message:active:before {
@@ -422,7 +434,7 @@ button.submit-message:active:before {
         rgba(8, 77, 126, 0.42) 100%
     ),
     rgba(47, 255, 255, 0.24);
-    box-shadow: inset 0 0 12px rgba(151, 200, 255, 0.44);
+    box-shadow: inset 0 0 0.75rem rgba(151, 200, 255, 0.44);
     z-index: -1;
 }
 
@@ -440,7 +452,7 @@ button.submit-message:active:before {
         rgba(8, 77, 126, 0.42) 100%
     ),
     rgba(47, 255, 255, 0.24);
-    box-shadow: inset 0 0 12px rgba(151, 200, 255, 0.44);
+    box-shadow: inset 0 0 0.75rem rgba(151, 200, 255, 0.44);
     border-radius: 0.5rem;
     opacity: 0;
     z-index: -1;
@@ -465,7 +477,7 @@ button.submit-message:active:before {
     content: "";
     position: absolute;
     border-radius: 0.5rem;
-    padding: 1px;
+    padding: 0.0625rem;
     inset: 0;
     background: linear-gradient(
         180deg,
@@ -517,21 +529,21 @@ button.submit-message:active:before {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 20px;
-    padding-bottom: 20px; /* Reduce padding to the bottom */
+    padding: 1.25rem;
+    padding-bottom: 1.25rem; /* Reduce padding to the bottom */
 }
 
 .skills-content {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5px; /* Reduce gap for better spacing */
+    gap: 0.3125rem; /* Reduce gap for better spacing */
     justify-items: center;
     align-items: center;
 }
 
 .skills-group {
-    padding: 5px; /* Reduce padding */
+    padding: 0.3125rem; /* Reduce padding */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -541,7 +553,7 @@ button.submit-message:active:before {
 .skills-icons {
     display: flex;
     justify-content: center;
-    gap: 5px; /* Reduce gap for better spacing */
+    gap: 0.3125rem; /* Reduce gap for better spacing */
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -552,25 +564,25 @@ button.submit-message:active:before {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 100px; /* Minimum width */
-    min-height: 100px; /* Minimum height */
+    min-width: 6.25rem; /* Minimum width */
+    min-height: 6.25rem; /* Minimum height */
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    border-radius: 0.625rem;
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+    padding: 0.625rem;
     flex-grow: 1; /* Allow the container to grow */
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
 }
 
 .skill-container:hover {
-    transform: translateY(-10px); /* Move up on hover */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    transform: translateY(-0.625rem); /* Move up on hover */
+    box-shadow: 0 0.9375rem 1.875rem rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
 }
 
 .skill-logo {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 5px;
+    width: 3.125rem;
+    height: 3.125rem;
+    margin-bottom: 0.3125rem;
 }
 
 .skills-section .row {
@@ -595,13 +607,13 @@ button.submit-message:active:before {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 .card {
     background-color: #f8f9fa; /* Softer white color */
-    width: 300px; /* Set a fixed width for the card */
-    height: 400px; /* Set a fixed height for the card */
+    width: 18.75rem; /* Set a fixed width for the card */
+    height: 25rem; /* Set a fixed height for the card */
     margin: 0 auto; /* Center the card */
     display: flex;
     flex-direction: column;
@@ -610,8 +622,8 @@ button.submit-message:active:before {
 
 /* Apply the hover effect to the card */
 .card:hover {
-    transform: scale(1.1) translateY(-10px); /* Scale up and move up on hover */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    transform: scale(1.1) translateY(-0.625rem); /* Scale up and move up on hover */
+    box-shadow: 0 0.9375rem 1.875rem rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
     z-index: 1; /* Bring the hovered card to the front */
 }
 
@@ -628,7 +640,7 @@ button.submit-message:active:before {
 
 .card-body {
     flex: 1; /* Ensure the body takes up half the card height */
-    padding: 15px;
+    padding: 0.9375rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -641,13 +653,13 @@ button.submit-message:active:before {
 
 .card-text {
     font-size: 0.9rem;
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem;
 }
 
 .skills-icons img {
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
+    width: 1.5625rem;
+    height: 1.5625rem;
+    margin-right: 0.3125rem;
 }
 
 /* Ensure the text font size in the Skills section matches the Projects section */
@@ -658,12 +670,12 @@ button.submit-message:active:before {
 /* Adjust the title "My Skills" to be a little bit lower */
 .skills-section .section-title {
     font-family: 'Eurostile', sans-serif; /* Update font to Eurostile, sans-serif */
-    margin-top: 20px; /* Add margin to lower the title */
+    margin-top: 1.25rem; /* Add margin to lower the title */
 }
 
 .scroll-element {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(1.25rem);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
@@ -674,13 +686,13 @@ button.submit-message:active:before {
 
 .back-to-top {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 1.25rem;
+    right: 1.25rem;
     background-color: #0b2545;
     color: #eef4ed;
     border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+    padding: 0.625rem 0.9375rem;
+    border-radius: 0.3125rem;
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
@@ -694,6 +706,6 @@ button.submit-message:active:before {
 
 .row.text-light.py-4 {
     width: 100%; /* Make the row take full width */
-    max-width: 1200px; /* Set a maximum width for better alignment */
+    max-width: 75rem; /* Set a maximum width for better alignment */
     margin: 0 auto; /* Center the row */
 }
