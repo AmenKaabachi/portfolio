@@ -30,6 +30,30 @@ body {
 .nav-link:hover {
     color: #8da9c4 !important; /* Navbar link hover color */
 }
+
+/* Navbar link underline effect */
+.navbar-nav .nav-item {
+    position: relative;
+}
+
+.navbar-nav .nav-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(30, 85, 168, 0.466);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.navbar-nav .nav-item:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
 .container {
     max-width: 1000px;
     margin: 0 auto;
@@ -633,6 +657,7 @@ button.submit-message:active:before {
 
 /* Adjust the title "My Skills" to be a little bit lower */
 .skills-section .section-title {
+    font-family: 'Eurostile', sans-serif; /* Update font to Eurostile, sans-serif */
     margin-top: 20px; /* Add margin to lower the title */
 }
 
