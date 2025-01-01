@@ -10,6 +10,11 @@
 </head>
 
 <body>
+    <!-- Loading Animation -->
+    <div class="loading-overlay">
+        <div class="loader"></div>
+    </div>
+    
     <!-- Bootstrap Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">Amen KAABACHI</a>
@@ -38,11 +43,11 @@
     <div class="about-section scroll-element" id="about">
         <div class="row w-100">
             <div class="col-md-6 text-light d-flex flex-column justify-content-center align-items-start">
-                <h1 class="text-left ml-5" style="font-size: 3rem; margin-top: 50px;">Hi, My name is Amen Kaabachi</h1>
-                <p class="text-left ml-5" style="font-size: 1.2rem;">Passionate about software development and solving complex problems. I am currently in my 3rd year of studies in Business Computing specializing in Business Information System (BIS) as a Business Computing Student. I am motivated and good at handling difficult problems.</p>
+                <h1 class="text-left ml-5 about-title">Hi, My name is Amen Kaabachi</h1>
+                <p class="text-left ml-5 about-description">Passionate about software development and solving complex problems. I am currently in my 3rd year of studies in Business Computing specializing in Business Information System (BIS) as a Business Computing Student. I am motivated and good at handling difficult problems.</p>
             </div>  
             <div class="col-md-6 d-flex align-items-center justify-content-center">
-                <img src="images/my-photo.jpg" alt="Amen KAABACHI" class="img-thumbnail rounded" style="width: 550px; height: 550px;">
+                <img src="images/my-photo.jpg" alt="Amen KAABACHI" class="img-thumbnail rounded profile-image">
             </div>
         </div>  
     </div>
@@ -50,11 +55,12 @@
     <!-- Skills Section -->
     <div class="skills-section scroll-element" id="skills" style="background-color: #f0f0f0;">
         <div class="section-title" style="color: rgb(8, 3, 3); font-family: 'Eurostile', sans-serif;">
-            <h2 style="font-size: 3rem; font-weight: bold;">My Skills</h2>
+            <h2  class="skills-title" >Skills</h2>
+            <div style="width: 50%; height: 2px; background-color: black; position: absolute; bottom: -10px; left: 25%;"></div>
         </div>
         <div class="skills-content">
             <div class="skills-group" style="margin-bottom: 50px;">
-                <h3 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">Programming Languages</h3>
+            <h3 class="skills-subtitle">Programming Languages</h3>
                 <div class="skills-icons" style="margin-bottom: 20px;">
                     <div class="skill-container">
                         <img src="images/java-logo.svg" alt="Java" class="skill-logo">
@@ -76,7 +82,7 @@
             </div>
 
             <div class="skills-group" style="margin-bottom: 50px;">
-                <h3 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">Web Development</h3>
+            <h3 class="skills-subtitle">Web Development</h3>
                 <div class="skills-icons" style="margin-bottom: 20px;">
                     <div class="skill-container">
                         <img src="images/html-logo.svg" alt="HTML" class="skill-logo">
@@ -97,7 +103,7 @@
                 </div>
             </div>
             <div class="skills-group" style="margin-bottom: 50px;">
-                <h3 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">Database Management</h3>
+            <h3 class="skills-subtitle">Database Management</h3>
                 <div class="skills-icons" style="margin-bottom: 20px;">
                     <div class="skill-container">
                         <img src="images/mysql-logo.svg" alt="MySQL" class="skill-logo">
@@ -106,7 +112,7 @@
                 </div>
             </div>
             <div class="skills-group" style="margin-bottom: 50px;">
-                <h3 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">Tools & Technologies</h3>
+            <h3 class="skills-subtitle">Tools & Technologies</h3>
                 <div class="skills-icons" style="margin-bottom: 20px;">
                     <div class="skill-container">
                         <img src="images/git-logo.svg" alt="Git" class="skill-logo">
@@ -190,12 +196,12 @@
         <div class="row text-light py-4">
             <!-- Contact Information -->
             <div class="col-md-6 contact-info">
-                <h2 class="text-center" style="font-weight: bold; color: black;">Contact Me</h2>
+            <h2 class="text-center contact-title">Contact Me</h2>
                 <div class="d-flex justify-content-center">
-                    <p class="mx-3"><a href="mailto:kaabachiamen@gmail.com"><i class="fas fa-envelope" style="font-size: 2rem; color: black;"></i></a></p>
-                    <p class="mx-3"><a href="tel:+21699841331"><i class="fas fa-phone" style="font-size: 2rem; color: black;"></i></a></p>
-                    <p class="mx-3"><a href="https://www.linkedin.com/in/amen-kaabachi-95306b248" target="_blank"><i class="fab fa-linkedin" style="font-size: 2rem; color: black;"></i></a></p>
-                    <p class="mx-3"><a href="https://github.com/AmenKaabachi" target="_blank"><i class="fab fa-github" style="font-size: 2rem; color: black;"></i></a></p>
+                    <p class="mx-3"><a href="mailto:kaabachiamen@gmail.com"><i class="fas fa-envelope contact-icon"></i></a></p>
+                    <p class="mx-3"><a href="tel:+21699841331"><i class="fas fa-phone contact-icon"></i></a></p>
+                    <p class="mx-3"><a href="https://www.linkedin.com/in/amen-kaabachi-95306b248" target="_blank"><i class="fab fa-linkedin contact-icon"></i></a></p>
+                    <p class="mx-3"><a href="https://github.com/AmenKaabachi" target="_blank"><i class="fab fa-github contact-icon"></i></a></p>
                 </div>
             </div>
             <!-- Contact Form -->
@@ -217,7 +223,8 @@
                         <label for="message" style="color: black;">Message</label>
                         <textarea class="form-control" id="message" name="message" rows="5" placeholder="Enter your message"></textarea>
                     </div>
-                    <button type="submit" class="submit-message" style="text-align: center; display: flex; justify-content: center; align-items: center; background-color: #007bff; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px;">Send</button>
+                    <button type="submit" class="submit-message btn btn-primary" style="color: white; text-align: center; line-height: 1.8;">Send</button>
+
                 </form> 
             </div>
         </div>

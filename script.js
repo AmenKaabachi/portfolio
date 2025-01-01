@@ -1,3 +1,12 @@
+// Hide loading animation when page is fully loaded
+window.addEventListener('load', () => {
+    const loadingOverlay = document.querySelector('.loading-overlay');
+    loadingOverlay.style.opacity = '0';
+    setTimeout(() => {
+        loadingOverlay.style.display = 'none';
+    }, 500); // Match the transition duration
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
     const backToTopButton = document.createElement('button');

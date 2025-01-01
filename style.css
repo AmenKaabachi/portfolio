@@ -1,5 +1,65 @@
 @import url('https://fonts.googleapis.com/css2?family=Europa:wght@400;700&display=swap');
 
+/* New Classes for Moved Styles */
+.about-title {
+    font-size: 3rem;
+    margin-top: 50px;
+}
+
+.about-description {
+    font-size: 1.2rem;
+}
+
+.profile-image {
+    width: 550px;
+    height: 550px;
+}
+
+.skills-subtitle {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.contact-title {
+    font-weight: bold;
+    color: black;
+}
+
+.contact-icon {
+    font-size: 2rem;
+    color: black;
+}
+
+/* Loading Animation Styles */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0b2545;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 body {
     font-family: 'Andale Mono', monospace;
     line-height: 1.6;
@@ -12,12 +72,12 @@ body {
 .navbar {
     position: fixed;
     top: 0;
-    left: 0; /* Ensure the navbar starts from the left edge */
+    left: 0;
     width: 100%;
     z-index: 1000;
-    background-color: transparent; /* Make the navbar transparent */
-    border-bottom: none; /* Remove border */
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Smooth transition for color change */
+    background-color: transparent;
+    border-bottom: none;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .navbar.scrolled {
@@ -60,16 +120,11 @@ body {
 }
 
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 62.5rem;
-    margin: 0 auto;
-    background: #134074; /* Dark container background */
+    background: #134074;
     padding: 1.875rem;
     border-radius: 0.625rem;
     box-shadow: 0 0 0.625rem rgba(0,0,0,0.1);
-    padding-top: 5rem; /* Add padding to avoid content being hidden behind the fixed navbar */
+    padding-top: 5rem;
 }
 
 .section-title {
@@ -80,14 +135,13 @@ body {
     text-transform: uppercase;
     border-bottom: 0.125rem solid #eef4ed;
     padding-bottom: 0.9375rem;
-}   
+}
 
 .section-content {
-    background: #13315c; /* Slightly different dark container background */
+    background: #13315c;
     padding: 1.25rem;
     border-radius: 0.625rem;
     box-shadow: 0 0 0.625rem rgba(0,0,0,0.1);
-    color: #eef4ed;
 }
 
 .skills, .projects {
@@ -203,11 +257,13 @@ body {
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for transform and background color */
+    text-decoration: none; /* Remove underline */
 }
 
 .contact-info a:hover {
     transform: scale(1.2); /* Scale up the icon */
     background-color: #007bff; /* Change background color on hover */
+    text-decoration: none; /* Ensure no underline on hover */
 }
 
 .contact-info a i {
@@ -236,21 +292,23 @@ body {
     width: calc(100% - 1.25rem); /* Increase width to align with the send button */
 }
 
-/* Submit button styling */
 .submit-message {
     background-color: #007bff; /* Bootstrap primary color */
-    color: #fff;
-    font-size: 1.25rem;
-    padding: 0.5rem 2rem;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center; /* Center the text */
-    display: flex; /* Use flexbox */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    color: white; /* Ensure white text color */
+    font-size: 1.25rem; /* Font size */
+    padding: 0.5rem 2rem; /* Padding inside the button */
+    border: none; /* Remove border */
+    border-radius: 0.5rem; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Horizontally center content */
+    align-items: center; /* Vertically center content */
+    width: 100%; /* Full width button */
+    text-align: center; /* Center text inside */
+    box-sizing: border-box; /* Include padding in width calculation */
 }
+
 
 .submit-message:hover {
     background-color: #0056b3; /* Darker blue on hover */
@@ -533,46 +591,68 @@ button.submit-message:active:before {
     padding-bottom: 1.25rem; /* Reduce padding to the bottom */
 }
 
-.skills-content {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.3125rem; /* Reduce gap for better spacing */
-    justify-items: center;
-    align-items: center;
+.skills-title {
+    font-family: 'Eurostile', sans-serif; /* Update font to Eurostile, sans-serif */
+    margin-top: 1.25rem; /* Add margin to lower the title */
+    font-size: 2rem; /* Reduce font size */
+    font-weight: bold; 
+    position: relative; 
+    display: inline-block;
+    text-decoration: underline; /* Add underline */
+    text-decoration-thickness: 0.25rem; /* Increase underline thickness */
+    text-decoration-color: #0b2545; /* Set underline color */
+    text-decoration-skip-ink: none; /* Remove underline from the underline */
+    text-underline-offset: 0.9rem; /* Reduce underline offset */
 }
 
+.skills-content {
+    width: 100%;
+    display: flex; /* Use flexbox for alignment */
+    gap: 1rem; /* Add spacing between skill groups */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    flex-wrap: nowrap; /* Prevent wrapping */
+    overflow-x: auto; /* Allow horizontal scrolling if content overflows */
+}
+
+
 .skills-group {
-    padding: 0.3125rem; /* Reduce padding */
+    padding: 0.3125rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex: 1 1 auto; /* Allow growing and shrinking */
+    min-width: fit-content; /* Expand to fit content */
+    white-space: nowrap;
+    text-align: center;
 }
 
 .skills-icons {
     display: flex;
-    justify-content: center;
-    gap: 0.3125rem; /* Reduce gap for better spacing */
+    flex-wrap: wrap;
+    gap: 0.3125rem;
     width: 100%;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0;
 }
 
 .skill-container {
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Column layout for content inside the container */
     align-items: center;
     justify-content: center;
-    min-width: 6.25rem; /* Minimum width */
-    min-height: 6.25rem; /* Minimum height */
-    background-color: #fff;
-    border-radius: 0.625rem;
-    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
-    padding: 0.625rem;
-    flex-grow: 1; /* Allow the container to grow */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
+    min-width: 6.25rem; /* Set a minimum width */
+    min-height: 6.25rem; /* Set a minimum height */
+    background-color: #fff; /* White background */
+    border-radius: 0.625rem; /* Rounded corners */
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 0.625rem; /* Internal spacing */
+    flex: 0 0 auto; /* Prevent growing and shrinking */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth hover transition */
 }
+
 
 .skill-container:hover {
     transform: translateY(-0.625rem); /* Move up on hover */
@@ -597,6 +677,24 @@ button.submit-message:active:before {
     height: 100%;
 }
 
+
+.skills-icons img {
+    width: 1.5625rem;
+    height: 1.5625rem;
+    margin-right: 0.3125rem;
+    flex-shrink: 0;
+}
+
+/* Ensure the text font size in the Skills section matches the Projects section */
+.skills-group h3, .skills-group p {
+    font-size: 1.2rem; /* Match the font size */
+}
+
+/* Adjust the title "My Skills" to be a little bit lower */
+.skills-section .section-title {
+    font-family: 'Eurostile', sans-serif; /* Update font to Eurostile, sans-serif */
+    margin-top: 1.25rem; /* Add margin to lower the title */
+}
 .projects-section {
     width: 100%;
     height: 100vh;
@@ -654,23 +752,6 @@ button.submit-message:active:before {
 .card-text {
     font-size: 0.9rem;
     margin-bottom: 0.9375rem;
-}
-
-.skills-icons img {
-    width: 1.5625rem;
-    height: 1.5625rem;
-    margin-right: 0.3125rem;
-}
-
-/* Ensure the text font size in the Skills section matches the Projects section */
-.skills-group h3, .skills-group p {
-    font-size: 1.2rem; /* Match the font size */
-}
-
-/* Adjust the title "My Skills" to be a little bit lower */
-.skills-section .section-title {
-    font-family: 'Eurostile', sans-serif; /* Update font to Eurostile, sans-serif */
-    margin-top: 1.25rem; /* Add margin to lower the title */
 }
 
 .scroll-element {
