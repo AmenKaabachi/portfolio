@@ -5,7 +5,38 @@ document.addEventListener('DOMContentLoaded', () => {
     backToTopButton.classList.add('back-to-top');
     document.body.appendChild(backToTopButton);
 
-    // Function to check if an element is in view
+    // Remove setting default theme to light mode
+    // document.body.classList.add('light-mode');
+
+    // Remove mode switch event listener
+    // const modeSwitch = document.querySelector('.mode-switch');
+    // modeSwitch.addEventListener('click', () => {
+    //     document.body.classList.toggle('light-mode');
+    // });
+
+    // Change navbar background color when scrolling down from the top of the page
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 0) {
+            navbar.classList.add('scrolled');
+            backToTopButton.classList.add('visible');
+        } else {
+            navbar.classList.remove('scrolled');
+            backToTopButton.classList.remove('visible');
+        }
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a.nav-link').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Scroll animations
+    const scrollElements = document.querySelectorAll('.scroll-element');
     const elementInView = (el, dividend = 1) => {
         const elementTop = el.getBoundingClientRect().top;
         return (
@@ -13,12 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     };
 
-    // Function to display elements with scroll animations
     const displayScrollElement = (element) => {
         element.classList.add('scrolled');
     };
 
-    // Handle scroll animations for elements
     const handleScrollAnimation = () => {
         scrollElements.forEach((el) => {
             if (elementInView(el, 1.25)) {
@@ -27,36 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Scroll event to change navbar background and show back-to-top button
     window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY > 0;
-        navbar.classList.toggle('scrolled', scrolled);
-        backToTopButton.classList.toggle('visible', scrolled);
         handleScrollAnimation();
     });
 
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a.nav-link').forEach((anchor) => {
-        anchor.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetElement = document.querySelector(anchor.getAttribute('href'));
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                });
-            }
-        });
-    });
-
-    // Back-to-top button functionality
+    // Back to top button functionality
     backToTopButton.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth',
+            behavior: 'smooth'
         });
     });
-
-    // Initial scroll animation setup
-    const scrollElements = document.querySelectorAll('.scroll-element, .contact-section');
-    handleScrollAnimation();
 });

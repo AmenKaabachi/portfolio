@@ -581,6 +581,14 @@ button.submit-message:active:before {
     margin: 0 auto; /* Center the card */
     display: flex;
     flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and box-shadow */
+}
+
+/* Apply the hover effect to the card */
+.card:hover {
+    transform: scale(1.1) translateY(-10px); /* Scale up and move up on hover */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    z-index: 1; /* Bring the hovered card to the front */
 }
 
 .card-header {
