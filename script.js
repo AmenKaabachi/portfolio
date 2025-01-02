@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a.nav-link').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
