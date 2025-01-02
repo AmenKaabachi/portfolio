@@ -1,11 +1,11 @@
 import { config } from 'dotenv';
-config({ path: './.env' });
+config({ path: '../config/.env' });
 import express from 'express';
 import cors from 'cors';
 import pkg from 'body-parser';
 const { json } = pkg;
 import db from './db.js';
-import contactRoutes from './contact.js';
+import contactRoutes from './routes/contact.js';
 
 const app = express();
 
