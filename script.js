@@ -14,16 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     backToTopButton.classList.add('back-to-top');
     document.body.appendChild(backToTopButton);
 
-    // Remove setting default theme to light mode
-    // document.body.classList.add('light-mode');
-
-    // Remove mode switch event listener
-    // const modeSwitch = document.querySelector('.mode-switch');
-    // modeSwitch.addEventListener('click', () => {
-    //     document.body.classList.toggle('light-mode');
-    // });
-
-    // Change navbar background color when scrolling down from the top of the page
     window.addEventListener('scroll', () => {
         if (window.scrollY > 0) {
             navbar.classList.add('scrolled');
