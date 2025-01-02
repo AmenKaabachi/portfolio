@@ -1,3 +1,6 @@
+// ======================
+// Loading Animation
+// ======================
 // Hide loading animation when page is fully loaded
 window.addEventListener('load', () => {
     const loadingOverlay = document.querySelector('.loading-overlay');
@@ -7,13 +10,15 @@ window.addEventListener('load', () => {
     }, 500); // Match the transition duration
 });
 
+// ======================
+// Navigation Setup
+// ======================
 document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
     const backToTopButton = document.createElement('button');
     backToTopButton.textContent = '↑';
     backToTopButton.classList.add('back-to-top');
     document.body.appendChild(backToTopButton);
-
     window.addEventListener('scroll', () => {
         if (window.scrollY > 0) {
             navbar.classList.add('scrolled');
@@ -24,6 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ======================
+    // Smooth Scrolling
+    // ======================
     // Smooth scrolling for navigation links
     document.querySelectorAll('a.nav-link').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -34,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ======================
+    // Scroll Animations
+    // ======================
     // Scroll animations
     const scrollElements = document.querySelectorAll('.scroll-element');
     const elementInView = (el, dividend = 1) => {
@@ -42,11 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
             elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
         );
     };
-
     const displayScrollElement = (element) => {
         element.classList.add('scrolled');
     };
-
     const handleScrollAnimation = () => {
         scrollElements.forEach((el) => {
             if (elementInView(el, 1.25)) {
@@ -54,11 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
-
     window.addEventListener('scroll', () => {
         handleScrollAnimation();
     });
 
+    // ======================
+    // Back to Top Button
+    // ======================
     // Back to top button functionality
     backToTopButton.addEventListener('click', () => {
         window.scrollTo({
