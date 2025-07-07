@@ -25,16 +25,16 @@ import { useState } from 'react';
 
 export default function Sidebar() {
   const { theme, toggleTheme } = useTheme();
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage, tString } = useLanguage();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const navigation = [
-    { name: t('about'), href: '/', icon: User },
-    { name: t('skills'), href: '#skills', icon: Code },
-    { name: t('projects'), href: '#projects', icon: FolderOpen },
-    { name: t('blog'), href: '#blog', icon: BookOpen },
-    { name: t('resume'), href: '/resume', icon: FileText },
+    { name: tString('about'), href: '/', icon: User },
+    { name: tString('skills'), href: '#skills', icon: Code },
+    { name: tString('projects'), href: '#projects', icon: FolderOpen },
+    { name: tString('blog'), href: '#blog', icon: BookOpen },
+    { name: tString('resume'), href: '/resume', icon: FileText },
   ];
 
   const handleNavClick = (href: string) => {
@@ -80,7 +80,7 @@ export default function Sidebar() {
               Amen KAABACHI
             </h1>
             <p className="text-sm text-muted-foreground">
-              {t('fullStackDeveloper')}
+              {tString('fullStackDeveloper')}
             </p>
           </div>
 
@@ -130,7 +130,7 @@ export default function Sidebar() {
             <Link href="/resume" className="block" onClick={() => setIsOpen(false)}>
               <Button variant="outline" className="w-full" size="sm">
                 <Download className="h-4 w-4 mr-2" />
-                {t('downloadResume')}
+                {tString('downloadResume')}
               </Button>
             </Link>
           </div>

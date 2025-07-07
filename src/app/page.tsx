@@ -45,7 +45,7 @@ import Flag from 'react-world-flags';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function Home() {
-	const { t } = useLanguage();
+	const { t, tString } = useLanguage();
 	const [showModal, setShowModal] = useState(false);
 	const [modalArticle, setModalArticle] = useState<string | null>(null);
 

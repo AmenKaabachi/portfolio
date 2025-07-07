@@ -8,6 +8,7 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string | string[];
+  tString: (key: string) => string;
 }
 
 const translations = {
@@ -153,12 +154,18 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     return translations[language][key as keyof typeof translations[Language]] || key;
   };
 
+  // Helper function to ensure string return for display purposes
+  const tString = (key: string): string => {
+    const result = t(key);
+    return Array.isArray(result) ? result.join(', ') : result;
+  };
+
   if (!mounted) {
     return null;
   }
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t, tString }}>
       {children}
     </LanguageContext.Provider>
   );
