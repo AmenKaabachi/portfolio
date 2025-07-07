@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,6 +21,8 @@ import {
 	Database,
 	Smartphone,
 	Globe,
+	BookOpen,
+	X,
 } from 'lucide-react';
 import {
 	SiPython,
@@ -50,6 +52,51 @@ export default function Home() {
 	const aboutRef = useRef(null);
 	const skillsRef = useRef(null);
 	const projectsRef = useRef(null);
+	const blogRef = useRef(null);
+	const [showModal, setShowModal] = useState(false);
+	const [modalArticle, setModalArticle] = useState<string | null>(null);
+	const modalRef = useRef<HTMLDivElement>(null);
+
+	const openModal = (articleId: string) => {
+		setModalArticle(articleId);
+		setShowModal(true);
+		document.body.style.overflow = 'hidden';
+	};
+
+	const closeModal = () => {
+		setShowModal(false);
+		setModalArticle(null);
+		document.body.style.overflow = 'auto';
+	};
+
+	useEffect(() => {
+		const handleEscape = (e: KeyboardEvent) => {
+			if (e.key === 'Escape' && showModal) {
+				closeModal();
+			}
+		};
+
+		document.addEventListener('keydown', handleEscape);
+		return () => document.removeEventListener('keydown', handleEscape);
+	}, [showModal]);
+
+	useEffect(() => {
+		if (showModal && modalRef.current) {
+			gsap.fromTo(
+				modalRef.current,
+				{
+					opacity: 0,
+					scale: 0.8,
+				},
+				{
+					opacity: 1,
+					scale: 1,
+					duration: 0.3,
+					ease: 'power2.out',
+				}
+			);
+		}
+	}, [showModal]);
 
 	useEffect(() => {
 		// GSAP animations
@@ -86,6 +133,23 @@ export default function Home() {
 				ease: 'power2.out',
 				scrollTrigger: {
 					trigger: projectsRef.current,
+					start: 'top 80%',
+					end: 'bottom 20%',
+					toggleActions: 'play none none reverse',
+				},
+			}
+		);
+
+		gsap.fromTo(
+			blogRef.current,
+			{ opacity: 0, y: 50 },
+			{
+				opacity: 1,
+				y: 0,
+				duration: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: blogRef.current,
 					start: 'top 80%',
 					end: 'bottom 20%',
 					toggleActions: 'play none none reverse',
@@ -411,6 +475,178 @@ export default function Home() {
           </div>
 				</div>
 			</section>
+
+			{/* Blog Section */}
+			<section id="blog" ref={blogRef} className="py-20 px-8 bg-muted/50">
+				<div className="max-w-4xl mx-auto">
+					<h2 className="text-3xl font-bold text-center mb-12 animate-gradient-text">
+						{t('blog')}
+					</h2>
+					<div className="grid md:grid-cols-2 gap-8">
+						{/* AI Competition Article */}
+						<Card className="hover:shadow-lg transition-shadow hover-lift hover-code">
+							<CardHeader>
+								<div className="flex items-center gap-2 mb-2">
+									<BookOpen className="h-5 w-5 text-primary" />
+									<Badge variant="outline" className="text-xs">AI Development</Badge>
+								</div>
+								<CardTitle className="text-lg leading-tight">
+									{t('aiCompetitionTitle') as string}
+								</CardTitle>
+								<CardDescription>
+									{t('aiCompetitionDesc') as string}
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-2">
+									{t('aiCompetitionContent') as string}
+								</p>
+								<Button 
+									variant="outline" 
+									size="sm" 
+									className="w-full"
+									onClick={() => openModal('ai-competition')}
+								>
+									<BookOpen className="h-4 w-4 mr-2" />
+									{t('readMore') as string}
+								</Button>
+							</CardContent>
+						</Card>
+
+						{/* Data Value Article */}
+						<Card className="hover:shadow-lg transition-shadow hover-lift hover-code">
+							<CardHeader>
+								<div className="flex items-center gap-2 mb-2">
+									<Database className="h-5 w-5 text-primary" />
+									<Badge variant="outline" className="text-xs">Data Science</Badge>
+								</div>
+								<CardTitle className="text-lg leading-tight">
+									{t('dataValueTitle') as string}
+								</CardTitle>
+								<CardDescription>
+									{t('dataValueDesc') as string}
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-2">
+									{t('dataValueContent') as string}
+								</p>
+								<Button 
+									variant="outline" 
+									size="sm" 
+									className="w-full"
+									onClick={() => openModal('data-value')}
+								>
+									<BookOpen className="h-4 w-4 mr-2" />
+									{t('readMore') as string}
+								</Button>
+							</CardContent>
+						</Card>
+					</div>
+				</div>
+			</section>
+
+			{/* Blog Modal */}
+			{showModal && modalArticle && (
+				<div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+					{/* Backdrop */}
+					<div 
+						className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
+						onClick={closeModal}
+					/>
+					
+					{/* Modal Content */}
+					<div 
+						ref={modalRef}
+						className="relative bg-background border rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+					>
+						{/* Close Button */}
+						<button
+							onClick={closeModal}
+							className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/80 hover:bg-background border shadow-sm transition-colors"
+						>
+							<X className="h-4 w-4" />
+						</button>
+
+						{/* Modal Content */}
+						<div className="p-8">
+							{modalArticle === 'ai-competition' && (
+								<div className="space-y-6">
+									<div className="flex items-center gap-3 mb-6">
+										<Code className="h-6 w-6 text-primary" />
+										<Badge variant="outline">AI Technology</Badge>
+									</div>
+									<h2 className="text-2xl font-bold text-foreground mb-4">
+										{t('aiCompetitionTitle') as string}
+									</h2>
+									<p className="text-muted-foreground text-lg leading-relaxed mb-6">
+										{t('aiCompetitionDesc') as string}
+									</p>
+									
+									<div className="prose prose-lg max-w-none">
+										<h3 className="font-semibold text-foreground mb-3">Introduction</h3>
+										<p className="text-muted-foreground leading-relaxed mb-6">
+											{t('aiCompetitionIntro') as string}
+										</p>
+										
+										<h3 className="font-semibold text-foreground mb-3">Key Points</h3>
+										<ul className="text-muted-foreground space-y-2 mb-6">
+											{(t('aiCompetitionPoints') as string[]).map((point, index) => (
+												<li key={index} className="flex items-start gap-3">
+													<span className="text-primary mt-1 text-lg">•</span>
+													<span>{point}</span>
+												</li>
+											))}
+										</ul>
+										
+										<h3 className="font-semibold text-foreground mb-3">Conclusion</h3>
+										<p className="text-muted-foreground leading-relaxed">
+											{t('aiCompetitionConclusion') as string}
+										</p>
+									</div>
+								</div>
+							)}
+
+							{modalArticle === 'data-value' && (
+								<div className="space-y-6">
+									<div className="flex items-center gap-3 mb-6">
+										<Database className="h-6 w-6 text-primary" />
+										<Badge variant="outline">Data Science</Badge>
+									</div>
+									<h2 className="text-2xl font-bold text-foreground mb-4">
+										{t('dataValueTitle') as string}
+									</h2>
+									<p className="text-muted-foreground text-lg leading-relaxed mb-6">
+										{t('dataValueDesc') as string}
+									</p>
+									
+									<div className="prose prose-lg max-w-none">
+										<h3 className="font-semibold text-foreground mb-3">Introduction</h3>
+										<p className="text-muted-foreground leading-relaxed mb-6">
+											{t('dataValueIntro') as string}
+										</p>
+										
+										<h3 className="font-semibold text-foreground mb-3">Key Points</h3>
+										<ul className="text-muted-foreground space-y-2 mb-6">
+											{(t('dataValuePoints') as string[]).map((point, index) => (
+												<li key={index} className="flex items-start gap-3">
+													<span className="text-primary mt-1 text-lg">•</span>
+													<span>{point}</span>
+												</li>
+											))}
+										</ul>
+										
+										<h3 className="font-semibold text-foreground mb-3">Conclusion</h3>
+										<p className="text-muted-foreground leading-relaxed">
+											{t('dataValueConclusion') as string}
+										</p>
+									</div>
+								</div>
+							)}
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -14,7 +14,8 @@ import {
   Download,
   Languages,
   Menu,
-  X
+  X,
+  BookOpen
 } from 'lucide-react';
 import Flag from 'react-world-flags';
 import Link from 'next/link';
@@ -32,6 +33,7 @@ export default function Sidebar() {
     { name: t('about'), href: '/', icon: User },
     { name: t('skills'), href: '#skills', icon: Code },
     { name: t('projects'), href: '#projects', icon: FolderOpen },
+    { name: t('blog'), href: '#blog', icon: BookOpen },
     { name: t('resume'), href: '/resume', icon: FileText },
   ];
 
