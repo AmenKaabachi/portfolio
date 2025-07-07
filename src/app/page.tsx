@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import {
@@ -42,31 +42,32 @@ import {
 	SiDotnet,
 } from 'react-icons/si';
 import Flag from 'react-world-flags';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion, AnimatePresence } from 'motion/react';
 
 export default function Home() {
 	const { t } = useLanguage();
-	const aboutRef = useRef(null);
-	const skillsRef = useRef(null);
-	const projectsRef = useRef(null);
-	const blogRef = useRef(null);
 	const [showModal, setShowModal] = useState(false);
 	const [modalArticle, setModalArticle] = useState<string | null>(null);
-	const modalRef = useRef<HTMLDivElement>(null);
 
 	const openModal = (articleId: string) => {
-		setModalArticle(articleId);
-		setShowModal(true);
-		document.body.style.overflow = 'hidden';
+		// Use requestAnimationFrame for smoother animation
+		requestAnimationFrame(() => {
+			setModalArticle(articleId);
+			setShowModal(true);
+		});
+		// Set body overflow in next tick to prevent layout shift
+		setTimeout(() => {
+			document.body.style.overflow = 'hidden';
+		}, 0);
 	};
 
 	const closeModal = () => {
 		setShowModal(false);
-		setModalArticle(null);
-		document.body.style.overflow = 'auto';
+		// Clear modal article after animation completes
+		setTimeout(() => {
+			setModalArticle(null);
+			document.body.style.overflow = 'auto';
+		}, 150);
 	};
 
 	useEffect(() => {
@@ -80,87 +81,44 @@ export default function Home() {
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, [showModal]);
 
-	useEffect(() => {
-		if (showModal && modalRef.current) {
-			gsap.fromTo(
-				modalRef.current,
-				{
-					opacity: 0,
-					scale: 0.8,
-				},
-				{
-					opacity: 1,
-					scale: 1,
-					duration: 0.3,
-					ease: 'power2.out',
-				}
-			);
+	// Animation variants
+	const fadeInUp = {
+		initial: { opacity: 0, y: 50 },
+		animate: { opacity: 1, y: 0 },
+		transition: { duration: 0.8, ease: "easeOut" }
+	};
+
+	const staggerContainer = {
+		animate: {
+			transition: {
+				staggerChildren: 0.1
+			}
 		}
-	}, [showModal]);
+	};
 
-	useEffect(() => {
-		// GSAP animations
-		gsap.fromTo(
-			aboutRef.current,
-			{ opacity: 0, y: 50 },
-			{ opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
-		);
+	const modalVariants = {
+		hidden: { 
+			opacity: 0, 
+			scale: 0.85,
+			y: 20
+		},
+		visible: { 
+			opacity: 1, 
+			scale: 1,
+			y: 0
+		},
+		exit: { 
+			opacity: 0, 
+			scale: 0.85,
+			y: 20
+		}
+	};
 
-		gsap.fromTo(
-			skillsRef.current,
-			{ opacity: 0, y: 50 },
-			{
-				opacity: 1,
-				y: 0,
-				duration: 1,
-				ease: 'power2.out',
-				scrollTrigger: {
-					trigger: skillsRef.current,
-					start: 'top 80%',
-					end: 'bottom 20%',
-					toggleActions: 'play none none reverse',
-				},
-			}
-		);
-
-		gsap.fromTo(
-			projectsRef.current,
-			{ opacity: 0, y: 50 },
-			{
-				opacity: 1,
-				y: 0,
-				duration: 1,
-				ease: 'power2.out',
-				scrollTrigger: {
-					trigger: projectsRef.current,
-					start: 'top 80%',
-					end: 'bottom 20%',
-					toggleActions: 'play none none reverse',
-				},
-			}
-		);
-
-		gsap.fromTo(
-			blogRef.current,
-			{ opacity: 0, y: 50 },
-			{
-				opacity: 1,
-				y: 0,
-				duration: 1,
-				ease: 'power2.out',
-				scrollTrigger: {
-					trigger: blogRef.current,
-					start: 'top 80%',
-					end: 'bottom 20%',
-					toggleActions: 'play none none reverse',
-				},
-			}
-		);
-
-		return () => {
-			ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-		};
-	}, []);
+	const backdropVariants = {
+		hidden: { opacity: 0 },
+		visible: { opacity: 1 },
+		exit: { opacity: 0 }
+	};
 
 	const skills = {
 		programming: [
@@ -235,7 +193,12 @@ export default function Home() {
 	return (
 		<div className="min-h-screen bg-background">
 			{/* About Section */}
-			<section ref={aboutRef} className="py-20 px-8">
+			<motion.section 
+				className="py-20 px-8"
+				initial="initial"
+				animate="animate"
+				variants={fadeInUp}
+			>
 				<div className="max-w-4xl mx-auto">          <div className="text-center mb-16">
             <h1 className="text-4xl font-bold text-foreground mb-4 animate-gradient-text">
               Amen KAABACHI
@@ -347,16 +310,26 @@ export default function Home() {
 						</div>
 					</div>
 				</div>
-			</section>      {/* Skills Section */}
-      <section id="skills" ref={skillsRef} className="py-20 px-8 bg-muted/50 binary-bg">
+			</motion.section>      {/* Skills Section */}
+      <motion.section 
+        id="skills" 
+        className="py-20 px-8 bg-muted/50 binary-bg"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeInUp}
+      >
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12 animate-gradient-text">
             {t('skills')}
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-8">
+          <motion.div 
+            className="grid md:grid-cols-2 gap-8"
+            variants={staggerContainer}
+          >
             {/* Programming Languages */}
-            <div className="space-y-3">
+            <motion.div className="space-y-3" variants={fadeInUp}>
               <div className="flex items-center gap-2 mb-3">
                 <Code className="h-5 w-5 text-primary" />
                 <h3 className="font-semibold text-lg">{t('programming')}</h3>
@@ -372,10 +345,10 @@ export default function Home() {
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
 
             {/* Web Technologies */}
-            <div className="space-y-3">
+            <motion.div className="space-y-3" variants={fadeInUp}>
               <div className="flex items-center gap-2 mb-3">
                 <Globe className="h-5 w-5 text-primary" />
                 <h3 className="font-semibold text-lg">{t('web')}</h3>
@@ -391,10 +364,10 @@ export default function Home() {
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
 
             {/* Mobile Development */}
-            <div className="space-y-3">
+            <motion.div className="space-y-3" variants={fadeInUp}>
               <div className="flex items-center gap-2 mb-3">
                 <Smartphone className="h-5 w-5 text-primary" />
                 <h3 className="font-semibold text-lg">{t('mobile')}</h3>
@@ -410,10 +383,10 @@ export default function Home() {
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
 
             {/* Databases */}
-            <div className="space-y-3">
+            <motion.div className="space-y-3" variants={fadeInUp}>
               <div className="flex items-center gap-2 mb-3">
                 <Database className="h-5 w-5 text-primary" />
                 <h3 className="font-semibold text-lg">{t('databases')}</h3>
@@ -429,224 +402,280 @@ export default function Home() {
                   );
                 })}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>      {/* Projects Section */}
-      <section id="projects" ref={projectsRef} className="py-20 px-8">
+      </motion.section>      {/* Projects Section */}
+      <motion.section 
+        id="projects" 
+        className="py-20 px-8"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeInUp}
+      >
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12 animate-gradient-text">
             {t('projects')}
-          </h2><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          </h2><motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            variants={staggerContainer}
+          >
             {projects.map((project, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow hover-lift hover-code">
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg">{project.title}</CardTitle>
-                    <Badge variant="outline" className="text-xs">
-                      {project.type}
-                    </Badge>
-                  </div>
-                  <CardDescription>{project.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="secondary" className="flex items-center gap-1 px-2 py-1 text-xs">
-                        {getTechIcon(tech)}
-                        {tech}
+              <motion.div key={index} variants={fadeInUp}>
+                <Card className="hover:shadow-lg transition-shadow hover-lift hover-code h-full">
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-lg">{project.title}</CardTitle>
+                      <Badge variant="outline" className="text-xs">
+                        {project.type}
                       </Badge>
-                    ))}
-                  </div>
-                  <Button variant="outline" size="sm" className="w-full" asChild>
-                    <a 
-                      href={project.githubUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center"
-                    >
-                      <Github className="h-4 w-4 mr-2" />
-                      {t('viewProject')}
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
+                    </div>
+                    <CardDescription>{project.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-1 mb-4">
+                      {project.technologies.map((tech) => (
+                        <Badge key={tech} variant="secondary" className="flex items-center gap-1 px-2 py-1 text-xs">
+                          {getTechIcon(tech)}
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                    <Button variant="outline" size="sm" className="w-full" asChild>
+                      <a 
+                        href={project.githubUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center"
+                      >
+                        <Github className="h-4 w-4 mr-2" />
+                        {t('viewProject')}
+                      </a>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 				</div>
-			</section>
+			</motion.section>
 
 			{/* Blog Section */}
-			<section id="blog" ref={blogRef} className="py-20 px-8 bg-muted/50">
+			<motion.section 
+        id="blog" 
+        className="py-20 px-8 bg-muted/50"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeInUp}
+      >
 				<div className="max-w-4xl mx-auto">
 					<h2 className="text-3xl font-bold text-center mb-12 animate-gradient-text">
 						{t('blog')}
 					</h2>
-					<div className="grid md:grid-cols-2 gap-8">
+					<motion.div 
+            className="grid md:grid-cols-2 gap-8"
+            variants={staggerContainer}
+          >
 						{/* AI Competition Article */}
-						<Card className="hover:shadow-lg transition-shadow hover-lift hover-code">
-							<CardHeader>
-								<div className="flex items-center gap-2 mb-2">
-									<BookOpen className="h-5 w-5 text-primary" />
-									<Badge variant="outline" className="text-xs">AI Development</Badge>
-								</div>
-								<CardTitle className="text-lg leading-tight">
-									{t('aiCompetitionTitle') as string}
-								</CardTitle>
-								<CardDescription>
-									{t('aiCompetitionDesc') as string}
-								</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-2">
-									{t('aiCompetitionContent') as string}
-								</p>
-								<Button 
-									variant="outline" 
-									size="sm" 
-									className="w-full"
-									onClick={() => openModal('ai-competition')}
-								>
-									<BookOpen className="h-4 w-4 mr-2" />
-									{t('readMore') as string}
-								</Button>
-							</CardContent>
-						</Card>
+						<motion.div variants={fadeInUp}>
+              <Card className="hover:shadow-lg transition-shadow hover-lift hover-code h-full">
+                <CardHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <BookOpen className="h-5 w-5 text-primary" />
+                    <Badge variant="outline" className="text-xs">AI Technology</Badge>
+                  </div>
+                  <CardTitle className="text-lg leading-tight">
+                    {t('aiCompetitionTitle') as string}
+                  </CardTitle>
+                  <CardDescription>
+                    {t('aiCompetitionDesc') as string}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-2">
+                    {t('aiCompetitionContent') as string}
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full"
+                    onClick={() => openModal('ai-competition')}
+                  >
+                    <BookOpen className="h-4 w-4 mr-2" />
+                    {t('readMore') as string}
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
 
 						{/* Data Value Article */}
-						<Card className="hover:shadow-lg transition-shadow hover-lift hover-code">
-							<CardHeader>
-								<div className="flex items-center gap-2 mb-2">
-									<Database className="h-5 w-5 text-primary" />
-									<Badge variant="outline" className="text-xs">Data Science</Badge>
-								</div>
-								<CardTitle className="text-lg leading-tight">
-									{t('dataValueTitle') as string}
-								</CardTitle>
-								<CardDescription>
-									{t('dataValueDesc') as string}
-								</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-2">
-									{t('dataValueContent') as string}
-								</p>
-								<Button 
-									variant="outline" 
-									size="sm" 
-									className="w-full"
-									onClick={() => openModal('data-value')}
-								>
-									<BookOpen className="h-4 w-4 mr-2" />
-									{t('readMore') as string}
-								</Button>
-							</CardContent>
-						</Card>
-					</div>
+						<motion.div variants={fadeInUp}>
+              <Card className="hover:shadow-lg transition-shadow hover-lift hover-code h-full">
+                <CardHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Database className="h-5 w-5 text-primary" />
+                    <Badge variant="outline" className="text-xs">Data Science</Badge>
+                  </div>
+                  <CardTitle className="text-lg leading-tight">
+                    {t('dataValueTitle') as string}
+                  </CardTitle>
+                  <CardDescription>
+                    {t('dataValueDesc') as string}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-2">
+                    {t('dataValueContent') as string}
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full"
+                    onClick={() => openModal('data-value')}
+                  >
+                    <BookOpen className="h-4 w-4 mr-2" />
+                    {t('readMore') as string}
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+					</motion.div>
 				</div>
-			</section>
+			</motion.section>
 
 			{/* Blog Modal */}
-			{showModal && modalArticle && (
-				<div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-					{/* Backdrop */}
-					<div 
-						className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
-						onClick={closeModal}
-					/>
-					
-					{/* Modal Content */}
-					<div 
-						ref={modalRef}
-						className="relative bg-background border rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+			<AnimatePresence mode="wait">
+				{showModal && modalArticle && (
+					<motion.div 
+						className="fixed inset-0 z-50 flex items-center justify-center p-4"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.15 }}
 					>
-						{/* Close Button */}
-						<button
+						{/* Backdrop */}
+						<motion.div 
+							className="absolute inset-0 bg-black/40" 
 							onClick={closeModal}
-							className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/80 hover:bg-background border shadow-sm transition-colors"
-						>
-							<X className="h-4 w-4" />
-						</button>
-
+							variants={backdropVariants}
+							initial="hidden"
+							animate="visible"
+							exit="exit"
+							transition={{ duration: 0.2 }}
+						/>
+						
 						{/* Modal Content */}
-						<div className="p-8">
-							{modalArticle === 'ai-competition' && (
-								<div className="space-y-6">
-									<div className="flex items-center gap-3 mb-6">
-										<Code className="h-6 w-6 text-primary" />
-										<Badge variant="outline">AI Technology</Badge>
-									</div>
-									<h2 className="text-2xl font-bold text-foreground mb-4">
-										{t('aiCompetitionTitle') as string}
-									</h2>
-									<p className="text-muted-foreground text-lg leading-relaxed mb-6">
-										{t('aiCompetitionDesc') as string}
-									</p>
-									
-									<div className="prose prose-lg max-w-none">
-										<h3 className="font-semibold text-foreground mb-3">Introduction</h3>
-										<p className="text-muted-foreground leading-relaxed mb-6">
-											{t('aiCompetitionIntro') as string}
-										</p>
-										
-										<h3 className="font-semibold text-foreground mb-3">Key Points</h3>
-										<ul className="text-muted-foreground space-y-2 mb-6">
-											{(t('aiCompetitionPoints') as string[]).map((point, index) => (
-												<li key={index} className="flex items-start gap-3">
-													<span className="text-primary mt-1 text-lg">•</span>
-													<span>{point}</span>
-												</li>
-											))}
-										</ul>
-										
-										<h3 className="font-semibold text-foreground mb-3">Conclusion</h3>
-										<p className="text-muted-foreground leading-relaxed">
-											{t('aiCompetitionConclusion') as string}
-										</p>
-									</div>
-								</div>
-							)}
+						<motion.div 
+							className="relative bg-background border rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto z-10"
+							variants={modalVariants}
+							initial="hidden"
+							animate="visible"
+							exit="exit"
+							transition={{ 
+								duration: 0.2,
+								ease: [0.25, 0.1, 0.25, 1.0]
+							}}
+							style={{ 
+								willChange: 'transform',
+								backfaceVisibility: 'hidden' 
+							}}
+						>
+							{/* Close Button */}
+							<button
+								onClick={closeModal}
+								className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/90 hover:bg-background border shadow-sm transition-colors"
+								aria-label="Close modal"
+							>
+								<X className="h-4 w-4" />
+							</button>
 
-							{modalArticle === 'data-value' && (
-								<div className="space-y-6">
-									<div className="flex items-center gap-3 mb-6">
-										<Database className="h-6 w-6 text-primary" />
-										<Badge variant="outline">Data Science</Badge>
-									</div>
-									<h2 className="text-2xl font-bold text-foreground mb-4">
-										{t('dataValueTitle') as string}
-									</h2>
-									<p className="text-muted-foreground text-lg leading-relaxed mb-6">
-										{t('dataValueDesc') as string}
-									</p>
-									
-									<div className="prose prose-lg max-w-none">
-										<h3 className="font-semibold text-foreground mb-3">Introduction</h3>
-										<p className="text-muted-foreground leading-relaxed mb-6">
-											{t('dataValueIntro') as string}
+							{/* Modal Content */}
+							<motion.div 
+								className="p-8"
+								initial={{ opacity: 0, y: 10 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ delay: 0.05, duration: 0.2 }}
+							>
+								{modalArticle === 'ai-competition' && (
+									<div className="space-y-6">
+										<div className="flex items-center gap-3 mb-6">
+											<Code className="h-6 w-6 text-primary" />
+											<Badge variant="outline">AI Technology</Badge>
+										</div>
+										<h2 className="text-2xl font-bold text-foreground mb-4">
+											{t('aiCompetitionTitle') as string}
+										</h2>
+										<p className="text-muted-foreground text-lg leading-relaxed mb-6">
+											{t('aiCompetitionDesc') as string}
 										</p>
 										
-										<h3 className="font-semibold text-foreground mb-3">Key Points</h3>
-										<ul className="text-muted-foreground space-y-2 mb-6">
-											{(t('dataValuePoints') as string[]).map((point, index) => (
-												<li key={index} className="flex items-start gap-3">
-													<span className="text-primary mt-1 text-lg">•</span>
-													<span>{point}</span>
-												</li>
-											))}
-										</ul>
-										
-										<h3 className="font-semibold text-foreground mb-3">Conclusion</h3>
-										<p className="text-muted-foreground leading-relaxed">
-											{t('dataValueConclusion') as string}
-										</p>
+										<div className="prose prose-lg max-w-none">
+											<h3 className="font-semibold text-foreground mb-3">Introduction</h3>
+											<p className="text-muted-foreground leading-relaxed mb-6">
+												{t('aiCompetitionIntro') as string}
+											</p>
+											
+											<h3 className="font-semibold text-foreground mb-3">Key Points</h3>
+											<ul className="text-muted-foreground space-y-2 mb-6">
+												{(t('aiCompetitionPoints') as string[]).map((point, index) => (
+													<li key={index} className="flex items-start gap-3">
+														<span className="text-primary mt-1 text-lg">•</span>
+														<span>{point}</span>
+													</li>
+												))}
+											</ul>
+											
+											<h3 className="font-semibold text-foreground mb-3">Conclusion</h3>
+											<p className="text-muted-foreground leading-relaxed">
+												{t('aiCompetitionConclusion') as string}
+											</p>
+										</div>
 									</div>
-								</div>
-							)}
-						</div>
-					</div>
-				</div>
-			)}
+								)}
+
+								{modalArticle === 'data-value' && (
+									<div className="space-y-6">
+										<div className="flex items-center gap-3 mb-6">
+											<Database className="h-6 w-6 text-primary" />
+											<Badge variant="outline">Data Science</Badge>
+										</div>
+										<h2 className="text-2xl font-bold text-foreground mb-4">
+											{t('dataValueTitle') as string}
+										</h2>
+										<p className="text-muted-foreground text-lg leading-relaxed mb-6">
+											{t('dataValueDesc') as string}
+										</p>
+										
+										<div className="prose prose-lg max-w-none">
+											<h3 className="font-semibold text-foreground mb-3">Introduction</h3>
+											<p className="text-muted-foreground leading-relaxed mb-6">
+												{t('dataValueIntro') as string}
+											</p>
+											
+											<h3 className="font-semibold text-foreground mb-3">Key Points</h3>
+											<ul className="text-muted-foreground space-y-2 mb-6">
+												{(t('dataValuePoints') as string[]).map((point, index) => (
+													<li key={index} className="flex items-start gap-3">
+														<span className="text-primary mt-1 text-lg">•</span>
+														<span>{point}</span>
+													</li>
+												))}
+											</ul>
+											
+											<h3 className="font-semibold text-foreground mb-3">Conclusion</h3>
+											<p className="text-muted-foreground leading-relaxed">
+												{t('dataValueConclusion') as string}
+											</p>
+										</div>
+									</div>
+								)}
+							</motion.div>
+						</motion.div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 }
