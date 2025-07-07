@@ -1,103 +1,416 @@
-import Image from "next/image";
+'use client';
+
+import React, { useEffect, useRef } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Button } from '@/components/ui/button';
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import {
+	Mail,
+	Phone,
+	MapPin,
+	Github,
+	Linkedin,
+	Code,
+	Database,
+	Smartphone,
+	Globe,
+} from 'lucide-react';
+import {
+	SiPython,
+	SiReact,
+	SiNodedotjs,
+	SiPhp,
+	SiFlutter,
+	SiMysql,
+	SiMongodb,
+	SiJavascript,
+	SiHtml5,
+	SiCss3,
+	SiBootstrap,
+	SiExpress,
+	SiC,
+	SiOpenjdk,
+	SiDotnet,
+} from 'react-icons/si';
+import Flag from 'react-world-flags';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+	const { t } = useLanguage();
+	const aboutRef = useRef(null);
+	const skillsRef = useRef(null);
+	const projectsRef = useRef(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+	useEffect(() => {
+		// GSAP animations
+		gsap.fromTo(
+			aboutRef.current,
+			{ opacity: 0, y: 50 },
+			{ opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
+		);
+
+		gsap.fromTo(
+			skillsRef.current,
+			{ opacity: 0, y: 50 },
+			{
+				opacity: 1,
+				y: 0,
+				duration: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: skillsRef.current,
+					start: 'top 80%',
+					end: 'bottom 20%',
+					toggleActions: 'play none none reverse',
+				},
+			}
+		);
+
+		gsap.fromTo(
+			projectsRef.current,
+			{ opacity: 0, y: 50 },
+			{
+				opacity: 1,
+				y: 0,
+				duration: 1,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: projectsRef.current,
+					start: 'top 80%',
+					end: 'bottom 20%',
+					toggleActions: 'play none none reverse',
+				},
+			}
+		);
+
+		return () => {
+			ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+		};
+	}, []);
+
+	const skills = {
+		programming: [
+			{ name: 'Python', icon: SiPython },
+			{ name: 'Java', icon: SiOpenjdk },
+			{ name: 'C', icon: SiC },
+			{ name: 'C#', icon: SiDotnet }
+		],
+		web: [
+			{ name: 'HTML', icon: SiHtml5 },
+			{ name: 'CSS', icon: SiCss3 },
+			{ name: 'Bootstrap', icon: SiBootstrap },
+			{ name: 'React.js', icon: SiReact },
+			{ name: 'Express.js', icon: SiExpress },
+			{ name: 'Node.js', icon: SiNodedotjs },
+			{ name: 'PHP', icon: SiPhp }
+		],
+		mobile: [
+			{ name: 'Java', icon: SiOpenjdk },
+			{ name: 'Flutter', icon: SiFlutter }
+		],
+		databases: [
+			{ name: 'SQL', icon: SiMysql },
+			{ name: 'NoSQL', icon: SiMongodb }
+		],
+	};
+
+	const projects = [
+		{
+			title: t('analyticsplatform'),
+			description: t('analyticsDesc'),
+			technologies: ['React.js', 'Express.js', 'MySQL', 'Flutter'],
+			type: 'FYP',
+			githubUrl: 'https://github.com/amenkaabachi', // Replace with your actual GitHub username
+		},
+		{
+			title: t('chatgptClone'),
+			description: t('chatgptDesc'),
+			technologies: ['C#'],
+			type: 'Personal',
+			githubUrl: 'https://github.com/amenkaabachi', // Replace with your actual GitHub username
+		},
+		{
+			title: t('liveChatApp'),
+			description: t('liveChatDesc'),
+			technologies: ['HTML', 'CSS', 'JavaScript', 'PHP'],
+			type: 'Personal',
+			githubUrl: 'https://github.com/amenkaabachi', // Replace with your actual GitHub username
+		},
+	];
+
+	// Function to get tech icon
+	const getTechIcon = (tech: string): React.ReactElement => {
+		const techIcons: { [key: string]: React.ReactElement } = {
+			'React.js': <SiReact className="h-3 w-3" />,
+			'Express.js': <SiExpress className="h-3 w-3" />,
+			'MySQL': <SiMysql className="h-3 w-3" />,
+			'Flutter': <SiFlutter className="h-3 w-3" />,
+			'C#': <SiDotnet className="h-3 w-3" />,
+			'HTML': <SiHtml5 className="h-3 w-3" />,
+			'CSS': <SiCss3 className="h-3 w-3" />,
+			'JavaScript': <SiJavascript className="h-3 w-3" />,
+			'PHP': <SiPhp className="h-3 w-3" />,
+			'Node.js': <SiNodedotjs className="h-3 w-3" />,
+			'Python': <SiPython className="h-3 w-3" />,
+			'Java': <SiOpenjdk className="h-3 w-3" />,
+			'Bootstrap': <SiBootstrap className="h-3 w-3" />,
+		};
+		return techIcons[tech] || <span className="h-3 w-3 text-gray-500">🔧</span>;
+	};
+
+	return (
+		<div className="min-h-screen bg-background">
+			{/* About Section */}
+			<section ref={aboutRef} className="py-20 px-8">
+				<div className="max-w-4xl mx-auto">          <div className="text-center mb-16">
+            <h1 className="text-4xl font-bold text-foreground mb-4 animate-gradient-text">
+              Amen KAABACHI
+            </h1>
+            <p className="text-xl text-muted-foreground mb-2">
+              {t('fullStackDeveloper')}
+            </p>
+            <p className="text-muted-foreground flex items-center justify-center gap-2">
+              <MapPin className="h-4 w-4" />
+              {t('location')}
+            </p>
+          </div>
+
+					<div className="grid md:grid-cols-2 gap-8 items-center">
+						<div>
+							<h2 className="text-2xl font-semibold mb-4">{t('about')}</h2>
+							<p className="text-muted-foreground mb-6 leading-relaxed">
+								{t('bio')}
+							</p>
+
+							<div className="space-y-3">
+								<div className="flex items-center gap-3">
+									<Mail className="h-4 w-4 text-primary" />
+									<a
+										href="mailto:kaabachiamen@gmail.com"
+										className="text-sm hover:text-primary transition-colors"
+									>
+										kaabachiamen@gmail.com
+									</a>
+								</div>
+								<div className="flex items-center gap-3">
+									<Phone className="h-4 w-4 text-primary" />
+									<a
+										href="tel:+21699841331"
+										className="text-sm hover:text-primary transition-colors"
+									>
+										+216 99841331
+									</a>
+								</div>
+							</div>
+
+							{/* Languages - Compact */}
+							<div className="mt-4">
+								<h3 className="text-sm font-medium text-muted-foreground mb-2">{t('languages')}</h3>
+								<div className="flex flex-wrap gap-1">
+									<Badge variant="outline" className="flex items-center gap-1 text-xs px-2 py-1">
+										<Flag
+											code="TN"
+											style={{
+												width: '0.75em',
+												height: '0.75em',
+											}}
+										/>
+										{t('arabicNative')}
+									</Badge>
+									<Badge variant="outline" className="flex items-center gap-1 text-xs px-2 py-1">
+										<Flag
+											code="US"
+											style={{
+												width: '0.75em',
+												height: '0.75em',
+											}}
+										/>
+										{t('englishFluent')}
+									</Badge>
+									<Badge variant="outline" className="flex items-center gap-1 text-xs px-2 py-1">
+										<Flag
+											code="FR"
+											style={{
+												width: '0.75em',
+												height: '0.75em',
+											}}
+										/>
+										{t('frenchC1')}
+									</Badge>
+								</div>
+							</div>
+						</div>
+
+						<div className="text-center">
+							<div className="flex justify-center gap-4 mb-6">
+								<Button variant="outline" size="lg" asChild>
+									<a href="mailto:kaabachiamen@gmail.com">
+										<Mail className="h-5 w-5 mr-2" />
+										{t('email')}
+									</a>
+								</Button>
+								<Button variant="outline" size="lg" asChild>
+									<a
+										href="https://linkedin.com"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										<Linkedin className="h-5 w-5 mr-2" />
+										LinkedIn
+									</a>
+								</Button>
+								<Button variant="outline" size="lg" asChild>
+									<a
+										href="https://github.com"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										<Github className="h-5 w-5 mr-2" />
+										GitHub
+									</a>
+								</Button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>      {/* Skills Section */}
+      <section id="skills" ref={skillsRef} className="py-20 px-8 bg-muted/50 binary-bg">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12 animate-gradient-text">
+            {t('skills')}
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Programming Languages */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 mb-3">
+                <Code className="h-5 w-5 text-primary" />
+                <h3 className="font-semibold text-lg">{t('programming')}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {skills.programming.map((skill) => {
+                  const IconComponent = skill.icon;
+                  return (
+                    <Badge key={skill.name} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors flex items-center gap-1 px-2 py-1 text-xs">
+                      <IconComponent className="h-3 w-3" />
+                      {skill.name}
+                    </Badge>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Web Technologies */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 mb-3">
+                <Globe className="h-5 w-5 text-primary" />
+                <h3 className="font-semibold text-lg">{t('web')}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {skills.web.map((skill) => {
+                  const IconComponent = skill.icon;
+                  return (
+                    <Badge key={skill.name} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors flex items-center gap-1 px-2 py-1 text-xs">
+                      <IconComponent className="h-3 w-3" />
+                      {skill.name}
+                    </Badge>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Mobile Development */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 mb-3">
+                <Smartphone className="h-5 w-5 text-primary" />
+                <h3 className="font-semibold text-lg">{t('mobile')}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {skills.mobile.map((skill) => {
+                  const IconComponent = skill.icon;
+                  return (
+                    <Badge key={skill.name} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors flex items-center gap-1 px-2 py-1 text-xs">
+                      <IconComponent className="h-3 w-3" />
+                      {skill.name}
+                    </Badge>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Databases */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 mb-3">
+                <Database className="h-5 w-5 text-primary" />
+                <h3 className="font-semibold text-lg">{t('databases')}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {skills.databases.map((skill) => {
+                  const IconComponent = skill.icon;
+                  return (
+                    <Badge key={skill.name} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors flex items-center gap-1 px-2 py-1 text-xs">
+                      <IconComponent className="h-3 w-3" />
+                      {skill.name}
+                    </Badge>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </section>      {/* Projects Section */}
+      <section id="projects" ref={projectsRef} className="py-20 px-8">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12 animate-gradient-text">
+            {t('projects')}
+          </h2><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow hover-lift hover-code">
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-lg">{project.title}</CardTitle>
+                    <Badge variant="outline" className="text-xs">
+                      {project.type}
+                    </Badge>
+                  </div>
+                  <CardDescription>{project.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {project.technologies.map((tech) => (
+                      <Badge key={tech} variant="secondary" className="flex items-center gap-1 px-2 py-1 text-xs">
+                        {getTechIcon(tech)}
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                  <Button variant="outline" size="sm" className="w-full" asChild>
+                    <a 
+                      href={project.githubUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center"
+                    >
+                      <Github className="h-4 w-4 mr-2" />
+                      {t('viewProject')}
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+				</div>
+			</section>
+		</div>
+	);
 }

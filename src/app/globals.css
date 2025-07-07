@@ -1,26 +1,370 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+  /* Light theme - Ocean Green palette */
+  --background: #f0f9f4; /* ocean-green-50 */
+  --foreground: #0c221a; /* ocean-green-950 */
+  --card: #dbf0e3; /* ocean-green-100 */
+  --card-foreground: #0c221a; /* ocean-green-950 */
+  --popover: #dbf0e3; /* ocean-green-100 */
+  --popover-foreground: #0c221a; /* ocean-green-950 */
+  --primary: #389169; /* ocean-green-500 */
+  --primary-foreground: #f0f9f4; /* ocean-green-50 */
+  --secondary: #277453; /* ocean-green-600 */
+  --secondary-foreground: #f0f9f4; /* ocean-green-50 */
+  --muted: #b9e1ca; /* ocean-green-200 */
+  --muted-foreground: #1f5d44; /* ocean-green-700 */
+  --accent: #53a87f; /* ocean-green-400 */
+  --accent-foreground: #f0f9f4; /* ocean-green-50 */
+  --destructive: #dc2626; /* Red for errors */
+  --border: #8bcaaa; /* ocean-green-300 */
+  --input: #b9e1ca; /* ocean-green-200 */
+  --ring: #389169; /* ocean-green-500 */
+  --chart-1: #53a87f; /* ocean-green-400 */
+  --chart-2: #389169; /* ocean-green-500 */
+  --chart-3: #277453; /* ocean-green-600 */
+  --chart-4: #1f5d44; /* ocean-green-700 */
+  --chart-5: #8bcaaa; /* ocean-green-300 */
+  --sidebar: #dbf0e3; /* ocean-green-100 */
+  --sidebar-foreground: #0c221a; /* ocean-green-950 */
+  --sidebar-primary: #389169; /* ocean-green-500 */
+  --sidebar-primary-foreground: #f0f9f4; /* ocean-green-50 */
+  --sidebar-accent: #b9e1ca; /* ocean-green-200 */
+  --sidebar-accent-foreground: #0c221a; /* ocean-green-950 */
+  --sidebar-border: #8bcaaa; /* ocean-green-300 */
+  --sidebar-ring: #389169; /* ocean-green-500 */
+}
+
+.dark {
+  /* Dark theme - Deep Ocean Green palette */
+  --background: #0c221a; /* ocean-green-950 */
+  --foreground: #f0f9f4; /* ocean-green-50 */
+  --card: #173d2f; /* ocean-green-900 */
+  --card-foreground: #f0f9f4; /* ocean-green-50 */
+  --popover: #173d2f; /* ocean-green-900 */
+  --popover-foreground: #f0f9f4; /* ocean-green-50 */
+  --primary: #53a87f; /* ocean-green-400 */
+  --primary-foreground: #0c221a; /* ocean-green-950 */
+  --secondary: #1b4a37; /* ocean-green-800 */
+  --secondary-foreground: #f0f9f4; /* ocean-green-50 */
+  --muted: #1f5d44; /* ocean-green-700 */
+  --muted-foreground: #b9e1ca; /* ocean-green-200 */
+  --accent: #8bcaaa; /* ocean-green-300 */
+  --accent-foreground: #0c221a; /* ocean-green-950 */
+  --destructive: #ef4444; /* Bright red for dark mode */
+  --border: #277453; /* ocean-green-600 */
+  --input: #1f5d44; /* ocean-green-700 */
+  --ring: #53a87f; /* ocean-green-400 */
+  --chart-1: #53a87f; /* ocean-green-400 */
+  --chart-2: #8bcaaa; /* ocean-green-300 */
+  --chart-3: #b9e1ca; /* ocean-green-200 */
+  --chart-4: #389169; /* ocean-green-500 */
+  --chart-5: #277453; /* ocean-green-600 */
+  --sidebar: #173d2f; /* ocean-green-900 */
+  --sidebar-foreground: #f0f9f4; /* ocean-green-50 */
+  --sidebar-primary: #53a87f; /* ocean-green-400 */
+  --sidebar-primary-foreground: #0c221a; /* ocean-green-950 */
+  --sidebar-accent: #1f5d44; /* ocean-green-700 */
+  --sidebar-accent-foreground: #f0f9f4; /* ocean-green-50 */
+  --sidebar-border: #277453; /* ocean-green-600 */
+  --sidebar-ring: #53a87f; /* ocean-green-400 */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom styles for portfolio */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Print styles for resume */
+@media print {
+  @page {
+    margin: 0.5in;
+    size: A4;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+    color: black !important;
+    background: white !important;
+  }
+  
+  .print\:shadow-none {
+    box-shadow: none !important;
+  }
+  
+  .print\:rounded-none {
+    border-radius: 0 !important;
+  }
+  
+  /* Hide sidebar and adjust layout for print */
+  aside {
+    display: none !important;
+  }
+  
+  main {
+    margin-left: 0 !important;
+  }
+  
+  button {
+    display: none !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  aside {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  
+  main {
+    margin-left: 0;
+  }
+  
+  .sidebar-mobile {
+    display: block;
+  }
+  
+  .sidebar-desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar-mobile {
+    display: none;
+  }
+  
+  .sidebar-desktop {
+    display: block;
+  }
+}
+
+/* Custom animations with vibrant colors */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulsing glow animation */
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.6);
+  }
+}
+
+/* Gradient text animation with ocean-green */
+.animate-gradient-text {
+  background: linear-gradient(90deg, 
+    #389169, /* ocean-green-500 */
+    #53a87f, /* ocean-green-400 */
+    #8bcaaa, /* ocean-green-300 */
+    #389169  /* ocean-green-500 */
+  );
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hover effects with ocean-green colors */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px #38916940; /* ocean-green-500 with 25% opacity */
+}
+
+/* Focus styles */
+.focus-visible:focus {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Custom scrollbar with ocean-green theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f9f4; /* ocean-green-50 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b9e1ca; /* ocean-green-200 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #389169; /* ocean-green-500 */
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0c221a; /* ocean-green-950 */
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #1f5d44; /* ocean-green-700 */
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #53a87f; /* ocean-green-400 */
+}
+
+/* Programming-themed gradient backgrounds */
+.gradient-code {
+  background: linear-gradient(135deg, 
+    #389169 0%, /* ocean-green-500 */
+    #53a87f 50%, /* ocean-green-400 */
+    #277453 100%); /* ocean-green-600 */
+}
+
+.gradient-terminal {
+  background: linear-gradient(135deg, 
+    #173d2f 0%, /* ocean-green-900 */
+    #0c221a 50%, /* ocean-green-950 */
+    #1b4a37 100%); /* ocean-green-800 */
+}
+
+/* Code syntax highlighting colors with ocean-green theme */
+.syntax-keyword { color: #53a87f; /* ocean-green-400 */ }
+.syntax-string { color: #8bcaaa; /* ocean-green-300 */ }
+.syntax-number { color: #b9e1ca; /* ocean-green-200 */ }
+.syntax-comment { color: #277453; /* ocean-green-600 */ }
+.syntax-function { color: #389169; /* ocean-green-500 */ }
+.syntax-variable { color: #1f5d44; /* ocean-green-700 */ }
+
+/* Ocean glow effects for dark mode */
+.dark .glow-primary {
+  box-shadow: 0 0 20px #53a87f4d; /* ocean-green-400 with 30% opacity */
+}
+
+.dark .glow-accent {
+  box-shadow: 0 0 20px #8bcaaa4d; /* ocean-green-300 with 30% opacity */
+}
+
+/* Ocean-style text effects */
+.ocean-text {
+  color: #53a87f; /* ocean-green-400 */
+  text-shadow: 0 0 10px #53a87f80; /* ocean-green-400 with 50% opacity */
+}
+
+/* Hover effects with ocean-green colors */
+.hover-code:hover {
+  background: linear-gradient(135deg, 
+    #38916919 0%, /* ocean-green-500 with 10% opacity */
+    #53a87f19 100%); /* ocean-green-400 with 10% opacity */
+  transition: all 0.3s ease;
+}
+
+/* Nature pattern background (subtle) */
+.binary-bg {
+  background-image: 
+    radial-gradient(circle at 20% 20%, #38916914 0%, transparent 50%), /* ocean-green-500 5% opacity */
+    radial-gradient(circle at 80% 80%, #53a87f14 0%, transparent 50%); /* ocean-green-400 5% opacity */
+}
+
+/* Ocean-inspired border animations */
+.border-tech {
+  border: 2px solid transparent;
+  background: linear-gradient(#f0f9f4, #f0f9f4) padding-box, /* ocean-green-50 */
+              linear-gradient(90deg, #389169, #53a87f) border-box; /* ocean-green-500 to ocean-green-400 */
 }
