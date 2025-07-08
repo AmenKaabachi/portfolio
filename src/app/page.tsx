@@ -231,16 +231,16 @@ export default function Home() {
 	};
 
 	return (
-		<div className="min-h-screen relative">
+		<div className="min-h-screen relative w-full overflow-x-hidden">
 			{/* Animated Background Cubes */}			
 			{/* About Section */}
 			<motion.section 
-				className="py-20 px-8"
+				className="py-20 px-4 md:px-8 mobile-content-section"
 				initial="initial"
 				animate="animate"
 				variants={fadeInUp}
 			>
-				<div className="max-w-4xl mx-auto">          <div className="text-center mb-16">
+				<div className="max-w-4xl mx-auto px-2 md:px-0">          <div className="text-center mb-16">
             <h1 className="text-4xl font-bold text-foreground mb-4 animate-gradient-text">
               Amen KAABACHI
             </h1>
@@ -321,13 +321,13 @@ export default function Home() {
 
 						<div className="text-center">
 							<div className="flex justify-center gap-4 mb-6">
-								<Button variant="outline" size="lg" asChild>
+								<Button variant="outline" size="lg" className="social-button" asChild>
 									<a href="mailto:kaabachiamen@gmail.com">
 										<Mail className="h-5 w-5 mr-2" />
 										{t('email')}
 									</a>
 								</Button>
-								<Button variant="outline" size="lg" asChild>
+								<Button variant="outline" size="lg" className="social-button" asChild>
 									<a
 										href="https://linkedin.com"
 										target="_blank"
@@ -337,7 +337,7 @@ export default function Home() {
 										LinkedIn
 									</a>
 								</Button>
-								<Button variant="outline" size="lg" asChild>
+								<Button variant="outline" size="lg" className="social-button" asChild>
 									<a
 										href="https://github.com"
 										target="_blank"
@@ -354,13 +354,13 @@ export default function Home() {
 			</motion.section>      {/* Skills Section */}
       <motion.section 
         id="skills" 
-        className="py-12 px-8 bg-muted/50 binary-bg"
+        className="py-12 px-4 md:px-8 bg-muted/50 binary-bg mobile-content-section"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeInUp}
       >
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto px-2 md:px-0">
           <h2 className="text-3xl font-bold text-center mb-8 animate-gradient-text">
             {t('skills')}
           </h2>
@@ -379,8 +379,8 @@ export default function Home() {
                 {skills.programming.map((skill) => {
                   const IconComponent = skill.icon;
                   return (
-                    <Badge key={skill.name} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors flex items-center gap-1 px-2 py-1 text-xs">
-                      <IconComponent className="h-3 w-3" />
+                    <Badge key={skill.name} className="tech-badge flex items-center gap-2">
+                      <IconComponent className="h-4 w-4" />
                       {skill.name}
                     </Badge>
                   );
@@ -398,8 +398,8 @@ export default function Home() {
                 {skills.frontend.map((skill) => {
                   const IconComponent = skill.icon;
                   return (
-                    <Badge key={skill.name} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors flex items-center gap-1 px-2 py-1 text-xs">
-                      <IconComponent className="h-3 w-3" />
+                    <Badge key={skill.name} className="tech-badge flex items-center gap-2">
+                      <IconComponent className="h-4 w-4" />
                       {skill.name}
                     </Badge>
                   );
@@ -417,8 +417,8 @@ export default function Home() {
                 {skills.backend.map((skill) => {
                   const IconComponent = skill.icon;
                   return (
-                    <Badge key={skill.name} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors flex items-center gap-1 px-2 py-1 text-xs">
-                      <IconComponent className="h-3 w-3" />
+                    <Badge key={skill.name} className="tech-badge flex items-center gap-2">
+                      <IconComponent className="h-4 w-4" />
                       {skill.name}
                     </Badge>
                   );
@@ -436,8 +436,8 @@ export default function Home() {
                 {skills.mobile.map((skill) => {
                   const IconComponent = skill.icon;
                   return (
-                    <Badge key={skill.name} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors flex items-center gap-1 px-2 py-1 text-xs">
-                      <IconComponent className="h-3 w-3" />
+                    <Badge key={skill.name} className="tech-badge flex items-center gap-2">
+                      <IconComponent className="h-4 w-4" />
                       {skill.name}
                     </Badge>
                   );
@@ -455,8 +455,8 @@ export default function Home() {
                 {skills.databases.map((skill) => {
                   const IconComponent = skill.icon;
                   return (
-                    <Badge key={skill.name} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors flex items-center gap-1 px-2 py-1 text-xs">
-                      <IconComponent className="h-3 w-3" />
+                    <Badge key={skill.name} className="tech-badge flex items-center gap-2">
+                      <IconComponent className="h-4 w-4" />
                       {skill.name}
                     </Badge>
                   );
@@ -468,13 +468,13 @@ export default function Home() {
       </motion.section>      {/* Projects Section */}
       <motion.section 
         id="projects" 
-        className="py-20 px-8"
+        className="py-20 px-4 md:px-8 mobile-content-section"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeInUp}
       >
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto px-2 md:px-0">
           <h2 className="text-3xl font-bold text-center mb-12 animate-gradient-text">
             {t('projects')}
           </h2><motion.div 
@@ -533,13 +533,13 @@ export default function Home() {
 			{/* Blog Section */}
 			<motion.section 
         id="blog" 
-        className="py-20 px-8 bg-muted/50"
+        className="py-20 px-4 md:px-8 bg-muted/50 binary-bg mobile-content-section"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeInUp}
       >
-				<div className="max-w-4xl mx-auto">
+				<div className="max-w-4xl mx-auto px-2 md:px-0">
 					<h2 className="text-3xl font-bold text-center mb-12 animate-gradient-text">
 						{t('blog')}
 					</h2>

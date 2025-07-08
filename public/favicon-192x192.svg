@@ -1,0 +1,12 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="96" cy="96" r="96" fill="#4CA771"/>
+  
+  <!-- Letter A with more detail for large size -->
+  <path d="M72 144V72L96 48L120 72V144H105V108H87V144H72ZM87 96H105V81L96 72L87 81V96Z" fill="#EAF9E7"/>
+  
+  <!-- Tech accents for larger size -->
+  <circle cx="144" cy="48" r="12" fill="#C0E6BA" opacity="0.8"/>
+  <circle cx="48" cy="144" r="9" fill="#C0E6BA" opacity="0.6"/>
+  <circle cx="156" cy="156" r="6" fill="#C0E6BA" opacity="0.4"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="16" fill="#4CA771"/>
+  
+  <!-- Letter A -->
+  <path d="M12 24V12L16 8L20 12V24H17.5V18H14.5V24H12ZM14.5 16H17.5V13.5L16 12L14.5 13.5V16Z" fill="#EAF9E7"/>
+  
+  <!-- Subtle tech accent -->
+  <circle cx="24" cy="8" r="2" fill="#C0E6BA" opacity="0.8"/>
+  <circle cx="8" cy="24" r="1.5" fill="#C0E6BA" opacity="0.6"/>
+</svg>

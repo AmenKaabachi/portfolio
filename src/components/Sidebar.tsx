@@ -31,6 +31,20 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('mobile-menu-open');
+    } else {
+      document.body.classList.remove('mobile-menu-open');
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove('mobile-menu-open');
+    };
+  }, [isOpen]);
+
   // Intersection Observer for active section highlighting
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]');
@@ -128,7 +142,7 @@ export default function Sidebar() {
       <Button
         variant="ghost"
         size="icon"
-        className="fixed top-4 left-4 z-50 md:hidden cursor-pointer"
+        className="mobile-menu-button md:hidden"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -137,21 +151,33 @@ export default function Sidebar() {
       {/* Mobile Overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-40 md:hidden cursor-pointer"
+          className="mobile-overlay md:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside className={cn(
-        "fixed left-0 top-0 h-full w-64 bg-background border-r border-border p-6 z-50 transform transition-transform duration-300 ease-in-out",
-        "md:translate-x-0",
-        isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        "fixed left-0 top-0 h-screen bg-background border-r border-border z-50 transform transition-transform duration-300 ease-in-out",
+        // Desktop styles - always visible and properly sized
+        "md:w-64 md:p-6 md:translate-x-0",
+        // Mobile styles - add specific class for open state
+        isOpen ? "sidebar-open" : "-translate-x-full md:translate-x-0"
       )}>
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full md:flex md:flex-col md:h-full mobile-sidebar-content">
+          {/* Mobile Close Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="mobile-close-button md:hidden"
+            onClick={() => setIsOpen(false)}
+          >
+            <X className="h-6 w-6" />
+          </Button>
+
           {/* Header */}
-          <div className="mb-8 mt-8 md:mt-0">
-            <h1 className="text-2xl font-bold text-foreground">
+          <div className="mb-8 mt-8 md:mt-0 md:mb-8 mobile-sidebar-header">
+            <h1 className="text-2xl md:text-xl font-bold text-foreground mb-2 md:mb-2">
               Amen KAABACHI
             </h1>
             <p className="text-sm text-muted-foreground">
@@ -172,26 +198,28 @@ export default function Sidebar() {
                       href={item.href}
                       onClick={() => setIsOpen(false)}
                       className={cn(
-                        'flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer',
+                        'flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors',
+                        'md:text-sm md:py-2 md:px-3 max-md:text-lg max-md:py-3 max-md:px-4',
                         isActive 
                           ? 'bg-primary text-primary-foreground' 
                           : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                       )}
                     >
-                      <Icon className="h-4 w-4" />
+                      <Icon className="h-4 w-4 md:h-4 md:w-4 max-md:h-5 max-md:w-5" />
                       {item.name}
                     </Link>
                   ) : (
                     <button
                       onClick={() => handleNavClick(item.href)}
                       className={cn(
-                        'w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer',
+                        'w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors',
+                        'md:text-sm md:py-2 md:px-3 max-md:text-lg max-md:py-3 max-md:px-4',
                         isActive 
                           ? 'bg-primary text-primary-foreground' 
                           : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                       )}
                     >
-                      <Icon className="h-4 w-4" />
+                      <Icon className="h-4 w-4 md:h-4 md:w-4 max-md:h-5 max-md:w-5" />
                       {item.name}
                     </button>
                   )}
@@ -201,9 +229,9 @@ export default function Sidebar() {
           </nav>
 
           {/* Download Resume */}
-          <div className="mb-6">
-            <Link href="/resume" className="block cursor-pointer" onClick={() => setIsOpen(false)}>
-              <Button variant="outline" className="w-full cursor-pointer" size="sm">
+          <div className="mb-6 max-md:mb-8 max-md:mt-6">
+            <Link href="/resume" className="block" onClick={() => setIsOpen(false)}>
+              <Button variant="outline" className="w-full" size="sm">
                 <Download className="h-4 w-4 mr-2" />
                 {tString('downloadResume')}
               </Button>
@@ -211,7 +239,7 @@ export default function Sidebar() {
           </div>
 
           {/* Controls */}
-          <div className="space-y-4 pt-4 border-t border-border">
+          <div className="space-y-4 pt-4 border-t border-border max-md:space-y-6 max-md:pt-6">
             {/* Theme Toggle */}
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">
@@ -222,7 +250,6 @@ export default function Sidebar() {
                 <Switch
                   checked={theme === 'dark'}
                   onCheckedChange={toggleTheme}
-                  className="cursor-pointer"
                 />
                 <Moon className="h-4 w-4 text-muted-foreground" />
               </div>
@@ -239,7 +266,7 @@ export default function Sidebar() {
                   variant={language === 'en' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setLanguage('en')}
-                  className="h-8 px-2 text-xs cursor-pointer"
+                  className="h-8 px-2 text-xs"
                   title="English"
                 >
                   <Flag
@@ -254,7 +281,7 @@ export default function Sidebar() {
                   variant={language === 'fr' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setLanguage('fr')}
-                  className="h-8 px-2 text-xs cursor-pointer"
+                  className="h-8 px-2 text-xs"
                   title="Français"
                 >
                   <Flag

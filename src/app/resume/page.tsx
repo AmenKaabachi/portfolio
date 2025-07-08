@@ -1,15 +1,12 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { 
   Mail, 
   Phone, 
   MapPin, 
   Download,
-  Calendar,
   GraduationCap,
   Briefcase
 } from 'lucide-react';
@@ -41,12 +38,12 @@ export default function Resume() {
   ];
 
   const technicalSkills = {
-    "Programming Languages": ["Python", "Java", "C", "C#", "JavaScript", "PHP"],
-    "Frontend Technologies": ["HTML", "CSS", "Bootstrap", "Tailwind CSS", "React.js", "Next.js", "Ext JS"],
-    "Backend Technologies": ["Express.js", "Node.js", "PHP"],
-    "Mobile Development": ["Java", "Flutter"],
-    "Databases": ["SQL", "NoSQL", "MySQL"],
-    "Tools & Technologies": ["Git", "REST APIs", "Responsive Design"]
+    "Languages": ["Python", "Java", "C", "C#", "JavaScript", "PHP"],
+    "Frontend": ["HTML", "CSS", "Bootstrap", "Tailwind CSS", "React.js", "Next.js"],
+    "Backend": ["Express.js", "Node.js", "PHP"],
+    "Mobile": ["Java", "Flutter"],
+    "Database": ["SQL", "NoSQL", "MySQL"],
+    "Tools": ["Git", "REST APIs", "Responsive Design"]
   };
 
   const languages = [
@@ -56,19 +53,16 @@ export default function Resume() {
   ];
 
   const interests = [
-    "Software Development",
-    "Mobile Applications",
+    "Web Development ,",
+    "Mobile Apps ,",
     "Problem Solving",
-    "Technology Innovation",
-    "Web Design",
-    "Database Design"
   ];
 
   return (
-    <div className="min-h-screen bg-background py-12 px-8">
+    <div className="min-h-screen bg-background py-12 px-8 resume-container">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 no-print">
           <Button 
             onClick={() => window.print()} 
             className="mb-6"
@@ -79,13 +73,13 @@ export default function Resume() {
           </Button>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden print:shadow-none print:rounded-none">
+        <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden resume-content">
           {/* Header Section */}
-          <div className="bg-primary text-primary-foreground p-8 gradient-code">
+          <div className="bg-primary text-primary-foreground p-6 gradient-code resume-header">
             <div className="text-center">
-              <h1 className="text-4xl font-bold mb-2">Amen KAABACHI</h1>
-              <p className="text-xl mb-4">Full-Stack Developer</p>
-              <div className="flex flex-wrap justify-center gap-6 text-sm">
+              <h1 className="text-3xl font-bold mb-2">Amen KAABACHI</h1>
+              <p className="text-lg mb-3">Full-Stack Developer</p>
+              <div className="flex flex-wrap justify-center gap-4 text-sm contact-info">
                 <div className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
                   kaabachiamen@gmail.com
@@ -102,141 +96,128 @@ export default function Resume() {
             </div>
           </div>
 
-          <div className="p-8 space-y-8">
+          <div className="p-6 space-y-6 resume-body">
             {/* Professional Summary */}
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-foreground border-b-2 border-primary pb-2">
+            <section className="resume-section">
+              <h2 className="text-xl font-bold mb-3 text-foreground border-b-2 border-primary pb-1">
                 Professional Summary
               </h2>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed text-sm">
                 Dedicated Full-Stack Developer with expertise in building clean, scalable, and efficient 
                 web and mobile applications. Business Information Systems graduate with a passion for 
-                solving real-world problems through technology. Experienced in modern web technologies, 
-                database design, and mobile application development.
+                solving real-world problems through technology.
               </p>
             </section>
 
-            {/* Education */}
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-foreground border-b-2 border-primary pb-2">
-                <GraduationCap className="inline h-6 w-6 mr-2" />
-                Education
-              </h2>
-              <div className="space-y-4">
-                {education.map((edu, index) => (
-                  <Card key={index} className="border-l-4 border-l-primary">
-                    <CardContent className="pt-4">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="font-semibold text-lg">{edu.degree}</h3>
-                        <Badge variant="secondary" className="ml-2">
-                          <Calendar className="h-3 w-3 mr-1" />
+            {/* Education & Experience in same row */}
+            <div className="resume-grid">
+              {/* Education */}
+              <section className="resume-section">
+                <h2 className="text-xl font-bold mb-3 text-foreground border-b-2 border-primary pb-1">
+                  <GraduationCap className="inline h-5 w-5 mr-1" />
+                  Education
+                </h2>
+                <div className="space-y-2">
+                  {education.map((edu, index) => (
+                    <div key={index} className="resume-card">
+                      <div className="flex justify-between items-start mb-1">
+                        <h3 className="font-semibold text-sm">{edu.degree}</h3>
+                        <span className="resume-badge">
                           {edu.year}
-                        </Badge>
+                        </span>
                       </div>
-                      <p className="text-muted-foreground">{edu.school}</p>
-                      <p className="text-sm text-muted-foreground">{edu.location}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </section>
+                      <p className="text-muted-foreground text-xs">{edu.school}</p>
+                      <p className="text-xs text-muted-foreground">{edu.location}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
 
-            {/* Experience */}
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-foreground border-b-2 border-primary pb-2">
-                <Briefcase className="inline h-6 w-6 mr-2" />
-                Experience
-              </h2>
-              <div className="space-y-4">
-                {experience.map((exp, index) => (
-                  <Card key={index} className="border-l-4 border-l-primary">
-                    <CardContent className="pt-4">
-                      <div className="flex justify-between items-start mb-2">
+              {/* Experience */}
+              <section className="resume-section">
+                <h2 className="text-xl font-bold mb-3 text-foreground border-b-2 border-primary pb-1">
+                  <Briefcase className="inline h-5 w-5 mr-1" />
+                  Experience
+                </h2>
+                <div className="space-y-2">
+                  {experience.map((exp, index) => (
+                    <div key={index} className="resume-card">
+                      <div className="flex justify-between items-start mb-1">
                         <div>
-                          <h3 className="font-semibold text-lg">{exp.title}</h3>
-                          <p className="text-muted-foreground">{exp.company}</p>
+                          <h3 className="font-semibold text-sm">{exp.title}</h3>
+                          <p className="text-muted-foreground text-xs">{exp.company}</p>
                         </div>
                         <div className="text-right">
-                          <Badge variant="secondary" className="mb-1">
-                            <Calendar className="h-3 w-3 mr-1" />
+                          <span className="resume-badge">
                             {exp.period}
-                          </Badge>
-                          <p className="text-sm text-muted-foreground">{exp.location}</p>
+                          </span>
                         </div>
                       </div>
-                      <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground mt-3">
-                        {exp.description.map((desc, i) => (
+                      <ul className="list-disc list-inside space-y-0 text-xs text-muted-foreground mt-2">
+                        {exp.description.slice(0, 2).map((desc, i) => (
                           <li key={i}>{desc}</li>
                         ))}
                       </ul>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </section>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </div>
 
-            {/* Technical Skills */}
-            <section>
-              <h2 className="text-2xl font-bold mb-4 text-foreground border-b-2 border-primary pb-2">
+            {/* Technical Skills - Compact Layout */}
+            <section className="resume-section">
+              <h2 className="text-xl font-bold mb-3 text-foreground border-b-2 border-primary pb-1">
                 Technical Skills
               </h2>
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="skills-compact">
                 {Object.entries(technicalSkills).map(([category, skills]) => (
-                  <Card key={category}>
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-lg">{category}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-wrap gap-2">
-                        {skills.map((skill) => (
-                          <Badge key={skill} variant="secondary">
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
+                  <div key={category} className="resume-card">
+                    <h3 className="font-semibold text-xs mb-1 text-primary">{category}</h3>
+                    <div className="flex flex-wrap gap-1">
+                      {skills.map((skill) => (
+                        <span key={skill} className="resume-badge text-xs">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </section>
 
-            {/* Languages & Interests */}
-            <div className="grid md:grid-cols-2 gap-8">
+            {/* Languages & Interests - Side by Side */}
+            <div className="side-sections">
               {/* Languages */}
-              <section>
-                <h2 className="text-2xl font-bold mb-4 text-foreground border-b-2 border-primary pb-2">
+              <section className="resume-section">
+                <h2 className="text-xl font-bold mb-3 text-foreground border-b-2 border-primary pb-1">
                   Languages
                 </h2>
-                <Card>
-                  <CardContent className="pt-4">
-                    <div className="space-y-3">
-                      {languages.map((lang, index) => (
-                        <div key={index} className="flex justify-between items-center">
-                          <span className="font-medium">{lang.name}</span>
-                          <Badge variant="outline">{lang.level}</Badge>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                <div className="resume-card">
+                  <div className="space-y-2">
+                    {languages.map((lang, index) => (
+                      <div key={index} className="flex justify-between items-center">
+                        <span className="font-medium text-sm">{lang.name}</span>
+                        <span className="resume-badge">{lang.level}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </section>
 
               {/* Interests */}
-              <section>
-                <h2 className="text-2xl font-bold mb-4 text-foreground border-b-2 border-primary pb-2">
+              <section className="resume-section">
+                <h2 className="text-xl font-bold mb-3 text-foreground border-b-2 border-primary pb-1">
                   Interests
                 </h2>
-                <Card>
-                  <CardContent className="pt-4">
-                    <div className="flex flex-wrap gap-2">
-                      {interests.map((interest) => (
-                        <Badge key={interest} variant="outline">
-                          {interest}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                <div className="resume-card">
+                  <div className="interests-list">
+                    {interests.map((interest) => (
+                      <span key={interest} className="interest-item">
+                        {interest}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </section>
             </div>
           </div>

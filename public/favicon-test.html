@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favicon Test - Amen KAABACHI</title>
+    
+    <!-- Modern favicon approach -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon-16x16.svg" sizes="16x16" type="image/svg+xml">
+    <link rel="icon" href="/favicon-32x32.svg" sizes="32x32" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/favicon-192x192.svg" sizes="192x192">
+    
+    <!-- Fallback for older browsers -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Theme color -->
+    <meta name="theme-color" content="#4CA771">
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #EAF9E7;
+            color: #013237;
+        }
+        .favicon-preview {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .favicon-preview img {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        h1 {
+            color: #4CA771;
+            text-align: center;
+        }
+        .color-palette {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .color-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Favicon Test - Amen KAABACHI Portfolio</h1>
+    
+    <h2>Favicon Preview</h2>
+    <div class="favicon-preview">
+        <img src="/favicon-16x16.svg" alt="16x16 favicon" width="16" height="16">
+        <span>16x16 - Browser tab (small)</span>
+    </div>
+    
+    <div class="favicon-preview">
+        <img src="/favicon-32x32.svg" alt="32x32 favicon" width="32" height="32">
+        <span>32x32 - Browser tab (standard)</span>
+    </div>
+    
+    <div class="favicon-preview">
+        <img src="/favicon-192x192.svg" alt="192x192 favicon" width="64" height="64">
+        <span>192x192 - PWA icon / Apple touch icon</span>
+    </div>
+    
+    <h2>Color Palette Used</h2>
+    <div class="color-palette">
+        <div class="color-box" style="background-color: #4CA771">#4CA771<br>Primary</div>
+        <div class="color-box" style="background-color: #EAF9E7; color: #013237">#EAF9E7<br>Light</div>
+        <div class="color-box" style="background-color: #C0E6BA; color: #013237">#C0E6BA<br>Accent</div>
+        <div class="color-box" style="background-color: #013237">#013237<br>Dark</div>
+    </div>
+    
+    <h2>Instructions</h2>
+    <p>The favicon has been created with your portfolio's green color scheme:</p>
+    <ul>
+        <li><strong>Letter "A"</strong> for Amen in light mint green (#EAF9E7)</li>
+        <li><strong>Green circular background</strong> using your primary color (#4CA771)</li>
+        <li><strong>Subtle tech accents</strong> for a modern, professional look</li>
+        <li><strong>SVG format</strong> for crisp display at any size</li>
+        <li><strong>Multiple sizes</strong> for optimal browser support</li>
+    </ul>
+    
+    <p>To generate the ICO file, run the PowerShell script in your project root:</p>
+    <code>.\generate-favicon.ps1</code>
+</body>
+</html>
