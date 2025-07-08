@@ -19,15 +19,67 @@ import {
 } from 'lucide-react';
 import Flag from 'react-world-flags';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Sidebar() {
   const { theme, toggleTheme } = useTheme();
   const { language, setLanguage, tString } = useLanguage();
   const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+
+  // Intersection Observer for active section highlighting
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the section that's most visible
+        let mostVisibleSection = '';
+        let maxVisibilityRatio = 0;
+
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > maxVisibilityRatio) {
+            maxVisibilityRatio = entry.intersectionRatio;
+            mostVisibleSection = entry.target.id;
+          }
+        });
+
+        // If no section is intersecting significantly, check scroll position
+        if (maxVisibilityRatio < 0.3) {
+          const scrollPosition = window.scrollY + window.innerHeight / 2;
+          const sectionIds = ['skills', 'projects', 'blog'];
+          
+          for (let i = sectionIds.length - 1; i >= 0; i--) {
+            const element = document.getElementById(sectionIds[i]);
+            if (element && scrollPosition >= element.offsetTop) {
+              mostVisibleSection = sectionIds[i];
+              break;
+            }
+          }
+        }
+
+        // Set active section, default to empty string for about section
+        if (mostVisibleSection && ['skills', 'projects', 'blog'].includes(mostVisibleSection)) {
+          setActiveSection(mostVisibleSection);
+        } else if (window.scrollY < 200) {
+          setActiveSection(''); // About section (top of page)
+        }
+      },
+      {
+        threshold: [0.1, 0.3, 0.5, 0.7],
+        rootMargin: '-20% 0px -20% 0px' // Only trigger when section is well into view
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
 
   const navigation = [
     { name: tString('about'), href: '/', icon: User },
@@ -38,13 +90,36 @@ export default function Sidebar() {
   ];
 
   const handleNavClick = (href: string) => {
-    if (href.startsWith('#')) {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+    if (href === '/') {
+      // About section - always navigate to home page
+      router.push('/');
+    } else if (href.startsWith('#')) {
+      // Section links
+      if (pathname === '/resume') {
+        // Navigate to home page with hash
+        router.push(`/${href}`);
+      } else {
+        // We're already on the home page, just scroll to section
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
     setIsOpen(false);
+  };
+
+  // Determine if a navigation item is active
+  const isNavItemActive = (item: { href: string }) => {
+    if (item.href === '/') {
+      return pathname === '/' && activeSection === '';
+    } else if (item.href === '/resume') {
+      return pathname === '/resume';
+    } else if (item.href.startsWith('#')) {
+      const sectionId = item.href.substring(1);
+      return activeSection === sectionId;
+    }
+    return false;
   };
 
   return (
@@ -53,7 +128,7 @@ export default function Sidebar() {
       <Button
         variant="ghost"
         size="icon"
-        className="fixed top-4 left-4 z-50 md:hidden"
+        className="fixed top-4 left-4 z-50 md:hidden cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -62,7 +137,7 @@ export default function Sidebar() {
       {/* Mobile Overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          className="fixed inset-0 bg-black/50 z-40 md:hidden cursor-pointer"
           onClick={() => setIsOpen(false)}
         />
       )}
@@ -88,29 +163,16 @@ export default function Sidebar() {
           <nav className="space-y-2 flex-1">
             {navigation.map((item) => {
               const Icon = item.icon;
-              const isActive = item.href === '/' ? pathname === '/' : pathname === item.href;
+              const isActive = isNavItemActive(item);
               
               return (
                 <div key={item.name}>
-                  {item.href.startsWith('#') ? (
-                    <button
-                      onClick={() => handleNavClick(item.href)}
-                      className={cn(
-                        'w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors',
-                        isActive 
-                          ? 'bg-primary text-primary-foreground' 
-                          : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                      )}
-                    >
-                      <Icon className="h-4 w-4" />
-                      {item.name}
-                    </button>
-                  ) : (
+                  {item.href === '/resume' ? (
                     <Link
                       href={item.href}
                       onClick={() => setIsOpen(false)}
                       className={cn(
-                        'flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors',
+                        'flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer',
                         isActive 
                           ? 'bg-primary text-primary-foreground' 
                           : 'text-muted-foreground hover:text-foreground hover:bg-muted'
@@ -119,6 +181,19 @@ export default function Sidebar() {
                       <Icon className="h-4 w-4" />
                       {item.name}
                     </Link>
+                  ) : (
+                    <button
+                      onClick={() => handleNavClick(item.href)}
+                      className={cn(
+                        'w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer',
+                        isActive 
+                          ? 'bg-primary text-primary-foreground' 
+                          : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                      )}
+                    >
+                      <Icon className="h-4 w-4" />
+                      {item.name}
+                    </button>
                   )}
                 </div>
               );
@@ -127,8 +202,8 @@ export default function Sidebar() {
 
           {/* Download Resume */}
           <div className="mb-6">
-            <Link href="/resume" className="block" onClick={() => setIsOpen(false)}>
-              <Button variant="outline" className="w-full" size="sm">
+            <Link href="/resume" className="block cursor-pointer" onClick={() => setIsOpen(false)}>
+              <Button variant="outline" className="w-full cursor-pointer" size="sm">
                 <Download className="h-4 w-4 mr-2" />
                 {tString('downloadResume')}
               </Button>
@@ -147,6 +222,7 @@ export default function Sidebar() {
                 <Switch
                   checked={theme === 'dark'}
                   onCheckedChange={toggleTheme}
+                  className="cursor-pointer"
                 />
                 <Moon className="h-4 w-4 text-muted-foreground" />
               </div>
@@ -163,7 +239,7 @@ export default function Sidebar() {
                   variant={language === 'en' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setLanguage('en')}
-                  className="h-8 px-2 text-xs"
+                  className="h-8 px-2 text-xs cursor-pointer"
                   title="English"
                 >
                   <Flag
@@ -178,7 +254,7 @@ export default function Sidebar() {
                   variant={language === 'fr' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setLanguage('fr')}
-                  className="h-8 px-2 text-xs"
+                  className="h-8 px-2 text-xs cursor-pointer"
                   title="Français"
                 >
                   <Flag

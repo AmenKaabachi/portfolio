@@ -42,7 +42,8 @@ export default function Resume() {
 
   const technicalSkills = {
     "Programming Languages": ["Python", "Java", "C", "C#", "JavaScript", "PHP"],
-    "Web Technologies": ["HTML", "CSS", "Bootstrap", "React.js", "Express.js", "Node.js"],
+    "Frontend Technologies": ["HTML", "CSS", "Bootstrap", "Tailwind CSS", "React.js", "Next.js", "Ext JS"],
+    "Backend Technologies": ["Express.js", "Node.js", "PHP"],
     "Mobile Development": ["Java", "Flutter"],
     "Databases": ["SQL", "NoSQL", "MySQL"],
     "Tools & Technologies": ["Git", "REST APIs", "Responsive Design"]

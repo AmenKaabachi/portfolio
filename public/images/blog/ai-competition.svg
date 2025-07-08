@@ -1,0 +1,36 @@
+<svg width="400" height="240" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="240" fill="#f0f9f4"/>
+  <rect x="50" y="50" width="300" height="140" rx="8" fill="#389169" fill-opacity="0.1" stroke="#389169" stroke-width="2"/>
+  
+  <!-- AI Brain -->
+  <circle cx="150" cy="120" r="30" fill="none" stroke="#389169" stroke-width="3"/>
+  <path d="M125 120 Q150 100 175 120 Q150 140 125 120" fill="none" stroke="#389169" stroke-width="2"/>
+  <circle cx="140" cy="115" r="3" fill="#389169"/>
+  <circle cx="160" cy="115" r="3" fill="#389169"/>
+  
+  <!-- Neural network connections -->
+  <line x1="180" y1="120" x2="220" y2="100" stroke="#53a87f" stroke-width="2"/>
+  <line x1="180" y1="120" x2="220" y2="120" stroke="#53a87f" stroke-width="2"/>
+  <line x1="180" y1="120" x2="220" y2="140" stroke="#53a87f" stroke-width="2"/>
+  <line x1="250" y1="100" x2="280" y2="120" stroke="#8bcaaa" stroke-width="2"/>
+  <line x1="250" y1="120" x2="280" y2="120" stroke="#8bcaaa" stroke-width="2"/>
+  <line x1="250" y1="140" x2="280" y2="120" stroke="#8bcaaa" stroke-width="2"/>
+  
+  <!-- Nodes -->
+  <circle cx="220" cy="100" r="5" fill="#53a87f"/>
+  <circle cx="220" cy="120" r="5" fill="#53a87f"/>
+  <circle cx="220" cy="140" r="5" fill="#53a87f"/>
+  <circle cx="250" cy="100" r="4" fill="#8bcaaa"/>
+  <circle cx="250" cy="120" r="4" fill="#8bcaaa"/>
+  <circle cx="250" cy="140" r="4" fill="#8bcaaa"/>
+  <circle cx="280" cy="120" r="6" fill="#389169"/>
+  
+  <!-- Trophy -->
+  <path d="M290 100 L300 100 L305 90 L295 90 Z" fill="#389169"/>
+  <rect x="292" y="100" width="6" height="8" fill="#389169"/>
+  <rect x="290" y="108" width="10" height="4" fill="#389169"/>
+  
+  <!-- Text -->
+  <text x="200" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#389169">AI Competition Success</text>
+  <text x="200" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#277453">Machine Learning • Competition • Innovation</text>
+</svg>

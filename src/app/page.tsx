@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import {
@@ -20,9 +21,10 @@ import {
 	Code,
 	Database,
 	Smartphone,
-	Globe,
 	BookOpen,
 	X,
+	Monitor,
+	Server,
 } from 'lucide-react';
 import {
 	SiPython,
@@ -40,14 +42,40 @@ import {
 	SiC,
 	SiOpenjdk,
 	SiDotnet,
+	SiTailwindcss,
+	SiNextdotjs,
 } from 'react-icons/si';
 import Flag from 'react-world-flags';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function Home() {
-	const { t, tString } = useLanguage();
+	const { t } = useLanguage();
 	const [showModal, setShowModal] = useState(false);
 	const [modalArticle, setModalArticle] = useState<string | null>(null);
+
+	// Handle URL hash navigation (for when coming from resume page)
+	useEffect(() => {
+		const handleHashNavigation = () => {
+			const hash = window.location.hash;
+			if (hash) {
+				// Small delay to ensure page is rendered
+				setTimeout(() => {
+					const element = document.querySelector(hash);
+					if (element) {
+						element.scrollIntoView({ behavior: 'smooth' });
+					}
+				}, 100);
+			}
+		};
+
+		// Handle initial load
+		handleHashNavigation();
+
+		// Listen for hash changes
+		window.addEventListener('hashchange', handleHashNavigation);
+
+		return () => window.removeEventListener('hashchange', handleHashNavigation);
+	}, []);
 
 	const openModal = (articleId: string) => {
 		// Use requestAnimationFrame for smoother animation
@@ -127,11 +155,17 @@ export default function Home() {
 			{ name: 'C', icon: SiC },
 			{ name: 'C#', icon: SiDotnet }
 		],
-		web: [
+		frontend: [
 			{ name: 'HTML', icon: SiHtml5 },
 			{ name: 'CSS', icon: SiCss3 },
+      			{ name: 'Javascript', icon: SiJavascript },
 			{ name: 'Bootstrap', icon: SiBootstrap },
+			{ name: 'Tailwind CSS', icon: SiTailwindcss },
 			{ name: 'React.js', icon: SiReact },
+			{ name: 'Next.js', icon: SiNextdotjs },
+
+		],
+		backend: [
 			{ name: 'Express.js', icon: SiExpress },
 			{ name: 'Node.js', icon: SiNodedotjs },
 			{ name: 'PHP', icon: SiPhp }
@@ -153,6 +187,7 @@ export default function Home() {
 			technologies: ['React.js', 'Express.js', 'MySQL', 'Flutter'],
 			type: 'FYP',
 			githubUrl: 'https://github.com/amenkaabachi', // Replace with your actual GitHub username
+			image: '/images/projects/analytics-platform.webp',
 		},
 		{
 			title: t('chatgptClone'),
@@ -160,6 +195,7 @@ export default function Home() {
 			technologies: ['C#'],
 			type: 'Personal',
 			githubUrl: 'https://github.com/amenkaabachi', // Replace with your actual GitHub username
+			image: '/images/projects/chatgpt-clone.jpg',
 		},
 		{
 			title: t('liveChatApp'),
@@ -167,6 +203,7 @@ export default function Home() {
 			technologies: ['HTML', 'CSS', 'JavaScript', 'PHP'],
 			type: 'Personal',
 			githubUrl: 'https://github.com/amenkaabachi', // Replace with your actual GitHub username
+			image: '/images/projects/live-chat-app.jpg',
 		},
 	];
 
@@ -174,6 +211,7 @@ export default function Home() {
 	const getTechIcon = (tech: string): React.ReactElement => {
 		const techIcons: { [key: string]: React.ReactElement } = {
 			'React.js': <SiReact className="h-3 w-3" />,
+			'Next.js': <SiNextdotjs className="h-3 w-3" />,
 			'Express.js': <SiExpress className="h-3 w-3" />,
 			'MySQL': <SiMysql className="h-3 w-3" />,
 			'Flutter': <SiFlutter className="h-3 w-3" />,
@@ -186,12 +224,15 @@ export default function Home() {
 			'Python': <SiPython className="h-3 w-3" />,
 			'Java': <SiOpenjdk className="h-3 w-3" />,
 			'Bootstrap': <SiBootstrap className="h-3 w-3" />,
+			'Tailwind CSS': <SiTailwindcss className="h-3 w-3" />,
+			'Ext JS': <SiJavascript className="h-3 w-3" />,
 		};
 		return techIcons[tech] || <span className="h-3 w-3 text-gray-500">🔧</span>;
 	};
 
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen relative">
+			{/* Animated Background Cubes */}			
 			{/* About Section */}
 			<motion.section 
 				className="py-20 px-8"
@@ -313,24 +354,24 @@ export default function Home() {
 			</motion.section>      {/* Skills Section */}
       <motion.section 
         id="skills" 
-        className="py-20 px-8 bg-muted/50 binary-bg"
+        className="py-12 px-8 bg-muted/50 binary-bg"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeInUp}
       >
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 animate-gradient-text">
+          <h2 className="text-3xl font-bold text-center mb-8 animate-gradient-text">
             {t('skills')}
           </h2>
           
           <motion.div 
-            className="grid md:grid-cols-2 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             variants={staggerContainer}
           >
             {/* Programming Languages */}
-            <motion.div className="space-y-3" variants={fadeInUp}>
-              <div className="flex items-center gap-2 mb-3">
+            <motion.div className="space-y-2" variants={fadeInUp}>
+              <div className="flex items-center gap-2 mb-2">
                 <Code className="h-5 w-5 text-primary" />
                 <h3 className="font-semibold text-lg">{t('programming')}</h3>
               </div>
@@ -347,14 +388,33 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Web Technologies */}
-            <motion.div className="space-y-3" variants={fadeInUp}>
-              <div className="flex items-center gap-2 mb-3">
-                <Globe className="h-5 w-5 text-primary" />
-                <h3 className="font-semibold text-lg">{t('web')}</h3>
+            {/* Frontend Technologies */}
+            <motion.div className="space-y-2" variants={fadeInUp}>
+              <div className="flex items-center gap-2 mb-2">
+                <Monitor className="h-5 w-5 text-primary" />
+                <h3 className="font-semibold text-lg">{t('frontend')}</h3>
               </div>
               <div className="flex flex-wrap gap-2">
-                {skills.web.map((skill) => {
+                {skills.frontend.map((skill) => {
+                  const IconComponent = skill.icon;
+                  return (
+                    <Badge key={skill.name} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors flex items-center gap-1 px-2 py-1 text-xs">
+                      <IconComponent className="h-3 w-3" />
+                      {skill.name}
+                    </Badge>
+                  );
+                })}
+              </div>
+            </motion.div>
+
+            {/* Backend Technologies */}
+            <motion.div className="space-y-2" variants={fadeInUp}>
+              <div className="flex items-center gap-2 mb-2">
+                <Server className="h-5 w-5 text-primary" />
+                <h3 className="font-semibold text-lg">{t('backend')}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {skills.backend.map((skill) => {
                   const IconComponent = skill.icon;
                   return (
                     <Badge key={skill.name} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors flex items-center gap-1 px-2 py-1 text-xs">
@@ -367,8 +427,8 @@ export default function Home() {
             </motion.div>
 
             {/* Mobile Development */}
-            <motion.div className="space-y-3" variants={fadeInUp}>
-              <div className="flex items-center gap-2 mb-3">
+            <motion.div className="space-y-2" variants={fadeInUp}>
+              <div className="flex items-center gap-2 mb-2">
                 <Smartphone className="h-5 w-5 text-primary" />
                 <h3 className="font-semibold text-lg">{t('mobile')}</h3>
               </div>
@@ -386,8 +446,8 @@ export default function Home() {
             </motion.div>
 
             {/* Databases */}
-            <motion.div className="space-y-3" variants={fadeInUp}>
-              <div className="flex items-center gap-2 mb-3">
+            <motion.div className="space-y-2" variants={fadeInUp}>
+              <div className="flex items-center gap-2 mb-2">
                 <Database className="h-5 w-5 text-primary" />
                 <h3 className="font-semibold text-lg">{t('databases')}</h3>
               </div>
@@ -424,6 +484,15 @@ export default function Home() {
             {projects.map((project, index) => (
               <motion.div key={index} variants={fadeInUp}>
                 <Card className="hover:shadow-lg transition-shadow hover-lift hover-code h-full">
+                  {/* Project Image */}
+                  <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
+                    <Image
+                      src={project.image}
+                      alt={project.title as string}
+                      fill
+                      className="object-cover transition-transform duration-300 hover:scale-105"
+                    />
+                  </div>
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-lg">{project.title}</CardTitle>
@@ -481,6 +550,15 @@ export default function Home() {
 						{/* AI Competition Article */}
 						<motion.div variants={fadeInUp}>
               <Card className="hover:shadow-lg transition-shadow hover-lift hover-code h-full">
+                {/* Article Image */}
+                <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
+                  <Image
+                    src="/images/blog/ai-competition.webp"
+                    alt="AI Competition Success"
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
                 <CardHeader>
                   <div className="flex items-center gap-2 mb-2">
                     <BookOpen className="h-5 w-5 text-primary" />
@@ -513,6 +591,15 @@ export default function Home() {
 						{/* Data Value Article */}
 						<motion.div variants={fadeInUp}>
               <Card className="hover:shadow-lg transition-shadow hover-lift hover-code h-full">
+                {/* Article Image */}
+                <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
+                  <Image
+                    src="/images/blog/data-value.jpg"
+                    alt="Unlocking Data Value"
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
                 <CardHeader>
                   <div className="flex items-center gap-2 mb-2">
                     <Database className="h-5 w-5 text-primary" />

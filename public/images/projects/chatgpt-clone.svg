@@ -1,0 +1,27 @@
+<svg width="400" height="240" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="240" fill="#f0f9f4"/>
+  <rect x="50" y="50" width="300" height="140" rx="8" fill="#389169" fill-opacity="0.1" stroke="#389169" stroke-width="2"/>
+  
+  <!-- Chat interface -->
+  <rect x="70" y="70" width="260" height="120" rx="8" fill="#dbf0e3"/>
+  
+  <!-- Chat messages -->
+  <rect x="80" y="85" width="160" height="20" rx="10" fill="#389169"/>
+  <rect x="200" y="115" width="120" height="20" rx="10" fill="#53a87f"/>
+  <rect x="80" y="145" width="180" height="20" rx="10" fill="#389169"/>
+  
+  <!-- Input field -->
+  <rect x="80" y="165" width="200" height="15" rx="7" fill="#b9e1ca" stroke="#389169" stroke-width="1"/>
+  <circle cx="295" cy="172" r="8" fill="#389169"/>
+  <polygon points="292,169 298,169 295,175" fill="#f0f9f4"/>
+  
+  <!-- AI brain icon -->
+  <circle cx="320" cy="90" r="15" fill="none" stroke="#389169" stroke-width="2"/>
+  <path d="M310 90 Q320 80 330 90 Q320 100 310 90" fill="none" stroke="#389169" stroke-width="2"/>
+  <circle cx="315" cy="87" r="2" fill="#389169"/>
+  <circle cx="325" cy="87" r="2" fill="#389169"/>
+  
+  <!-- Text -->
+  <text x="200" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#389169">ChatGPT Clone</text>
+  <text x="200" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#277453">C# • AI Integration</text>
+</svg>

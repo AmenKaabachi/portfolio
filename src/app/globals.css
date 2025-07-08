@@ -244,6 +244,11 @@ html {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradientShift 3s ease infinite;
+  line-height: 1.4;
+  padding: 4px 0 8px 0;
+  text-align: center;
+  position: relative;
+  overflow: visible;
 }
 
 @keyframes gradientShift {
@@ -260,6 +265,124 @@ html {
 .hover-lift:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 25px #38916940; /* ocean-green-500 with 25% opacity */
+}
+
+/* Image styles for projects and blog articles */
+.project-image, .blog-image {
+  transition: transform 0.3s ease-in-out;
+  border-radius: 8px 8px 0 0;
+}
+
+.project-image:hover, .blog-image:hover {
+  transform: scale(1.02);
+}
+
+/* Better image fitting for SVG content */
+.card-image-container {
+  background: linear-gradient(135deg, 
+    #f0f9f4 0%, /* ocean-green-50 */
+    #dbf0e3 100%); /* ocean-green-100 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.dark .card-image-container {
+  background: linear-gradient(135deg, 
+    #173d2f 0%, /* ocean-green-900 */
+    #1b4a37 100%); /* ocean-green-800 */
+}
+
+/* Improved SVG image scaling */
+.card-image-container svg,
+.card-image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Next.js Image component improvements */
+.next-image-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, 
+    #f0f9f4 0%, /* ocean-green-50 */
+    #dbf0e3 100%); /* ocean-green-100 */
+}
+
+.dark .next-image-container {
+  background: linear-gradient(135deg, 
+    #173d2f 0%, /* ocean-green-900 */
+    #1b4a37 100%); /* ocean-green-800 */
+}
+
+/* Ensure images maintain aspect ratio */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+/* Image container styles */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, 
+    #38916919 0%, /* ocean-green-500 with 10% opacity */
+    #53a87f19 100%); /* ocean-green-400 with 10% opacity */
+}
+
+/* Loading placeholder for images */
+.image-loading {
+  background: linear-gradient(90deg, 
+    #b9e1ca 25%, /* ocean-green-200 */
+    #8bcaaa 50%, /* ocean-green-300 */
+    #b9e1ca 75%  /* ocean-green-200 */
+  );
+  background-size: 200% 100%;
+  animation: loading 2s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Dark mode image adjustments */
+.dark .image-loading {
+  background: linear-gradient(90deg, 
+    #1f5d44 25%, /* ocean-green-700 */
+    #277453 50%, /* ocean-green-600 */
+    #1f5d44 75%  /* ocean-green-700 */
+  );
+  background-size: 200% 100%;
+}
+
+/* Card image overlay effects */
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    #38916908 100% /* ocean-green-500 with 3% opacity */
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-container:hover .image-overlay {
+  opacity: 1;
 }
 
 /* Focus styles */
@@ -398,6 +521,31 @@ html {
 .gpu-accelerated {
   transform: translateZ(0);
   will-change: transform;
+}
+
+/* Cursor pointer utilities */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Interactive elements should have pointer cursor */
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+select,
+a,
+.clickable {
+  cursor: pointer;
+}
+
+/* Disabled elements should use default cursor */
+button:disabled,
+input:disabled,
+select:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
 }
 
 /* Smooth modal animations */
