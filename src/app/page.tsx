@@ -40,11 +40,11 @@ import {
 	SiBootstrap,
 	SiExpress,
 	SiC,
-	SiOpenjdk,
 	SiDotnet,
 	SiTailwindcss,
 	SiNextdotjs,
 } from 'react-icons/si';
+import { FaJava } from 'react-icons/fa';
 import Flag from 'react-world-flags';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -151,7 +151,7 @@ export default function Home() {
 	const skills = {
 		programming: [
 			{ name: 'Python', icon: SiPython },
-			{ name: 'Java', icon: SiOpenjdk },
+			{ name: 'Java', icon: FaJava },
 			{ name: 'C', icon: SiC },
 			{ name: 'C#', icon: SiDotnet }
 		],
@@ -171,7 +171,7 @@ export default function Home() {
 			{ name: 'PHP', icon: SiPhp }
 		],
 		mobile: [
-			{ name: 'Java', icon: SiOpenjdk },
+			{ name: 'Java', icon: FaJava },
 			{ name: 'Flutter', icon: SiFlutter }
 		],
 		databases: [
@@ -222,7 +222,7 @@ export default function Home() {
 			'PHP': <SiPhp className="h-3 w-3" />,
 			'Node.js': <SiNodedotjs className="h-3 w-3" />,
 			'Python': <SiPython className="h-3 w-3" />,
-			'Java': <SiOpenjdk className="h-3 w-3" />,
+			'Java': <FaJava className="h-3 w-3" />,
 			'Bootstrap': <SiBootstrap className="h-3 w-3" />,
 			'Tailwind CSS': <SiTailwindcss className="h-3 w-3" />,
 			'Ext JS': <SiJavascript className="h-3 w-3" />,
@@ -231,7 +231,7 @@ export default function Home() {
 	};
 
 	return (
-		<div className="min-h-screen relative w-full overflow-x-hidden">
+		<div className="min-h-screen relative">
 			{/* Animated Background Cubes */}			
 			{/* About Section */}
 			<motion.section 
