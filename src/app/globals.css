@@ -837,6 +837,16 @@ html {
   background: #C0E6BA; /* Light green */
 }
 
+/* Hide scrollbar for horizontal scroll containers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Programming-themed gradient backgrounds */
 .gradient-code {
   background: linear-gradient(135deg, 

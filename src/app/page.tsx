@@ -205,6 +205,14 @@ export default function Home() {
 			githubUrl: 'https://github.com/amenkaabachi', // Replace with your actual GitHub username
 			image: '/images/projects/live-chat-app.jpg',
 		},
+		{
+			title: t('pdfOrganizer'),
+			description: t('pdfOrganizerDesc'),
+			technologies: ['Python'],
+			type: 'Personal',
+			githubUrl: 'https://github.com/amenkaabachi',
+			image: '/images/projects/pdf-organizer.svg',
+		},
 	];
 
 	// Function to get tech icon
@@ -468,57 +476,73 @@ export default function Home() {
       </motion.section>      {/* Projects Section */}
       <motion.section 
         id="projects" 
-        className="py-20 px-4 md:px-8 mobile-content-section"
+        className="py-20 mobile-content-section overflow-hidden"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeInUp}
       >
-        <div className="max-w-4xl mx-auto px-2 md:px-0">
-          <h2 className="text-3xl font-bold text-center mb-12 animate-gradient-text">
+        <div className="max-w-4xl mx-auto px-4 md:px-8 mb-8">
+          <h2 className="text-3xl font-bold text-center animate-gradient-text">
             {t('projects')}
-          </h2><motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          </h2>
+        </div>
+        
+        {/* Horizontal Scroll Container */}
+        <div className="relative overflow-hidden">
+          {/* Gradient Overlays for scroll indication */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          
+          <motion.div 
+            className="flex gap-6 overflow-x-auto py-4 px-8 md:px-16 snap-x snap-mandatory scrollbar-hide"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             variants={staggerContainer}
           >
             {projects.map((project, index) => (
-              <motion.div key={index} variants={fadeInUp}>
-                <Card className="hover:shadow-lg transition-shadow hover-lift hover-code h-full">
+              <motion.div 
+                key={index} 
+                variants={fadeInUp}
+                className="flex-shrink-0 w-[300px] md:w-[350px] snap-center py-2"
+              >
+                <Card className="shadow-md hover:shadow-2xl h-full group border hover:border-primary/50 hover:-translate-y-1 transition-all duration-500 ease-out">
                   {/* Project Image */}
                   <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
                     <Image
                       src={project.image}
                       alt={project.title as string}
                       fill
-                      className="object-cover transition-transform duration-300 hover:scale-105"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out" />
+                    <Badge 
+                      variant="outline" 
+                      className="absolute top-3 right-3 text-xs bg-background/90 backdrop-blur-sm border-primary/30 transition-all duration-500 ease-out"
+                    >
+                      {project.type}
+                    </Badge>
                   </div>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="text-lg">{project.title}</CardTitle>
-                      <Badge variant="outline" className="text-xs">
-                        {project.type}
-                      </Badge>
-                    </div>
-                    <CardDescription>{project.description}</CardDescription>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-lg group-hover:text-primary transition-colors duration-500 ease-out">{project.title}</CardTitle>
+                    <CardDescription className="line-clamp-2">{project.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="flex flex-wrap gap-1 mb-4">
                       {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="secondary" className="flex items-center gap-1 px-2 py-1 text-xs">
+                        <Badge key={tech} variant="secondary" className="flex items-center gap-1 px-2 py-1 text-xs transition-all duration-300 ease-out">
                           {getTechIcon(tech)}
                           {tech}
                         </Badge>
                       ))}
                     </div>
-                    <Button variant="outline" size="sm" className="w-full" asChild>
+                    <Button variant="outline" size="sm" className="w-full group/btn hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 ease-out" asChild>
                       <a 
                         href={project.githubUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="flex items-center justify-center"
                       >
-                        <Github className="h-4 w-4 mr-2" />
+                        <Github className="h-4 w-4 mr-2 transition-transform duration-300 ease-out group-hover/btn:rotate-12" />
                         {t('viewProject')}
                       </a>
                     </Button>
@@ -527,7 +551,14 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
-				</div>
+          
+          {/* Scroll hint */}
+          <p className="text-center text-sm text-muted-foreground mt-4 flex items-center justify-center gap-2">
+            <span className="animate-pulse">←</span>
+            Scroll to explore
+            <span className="animate-pulse">→</span>
+          </p>
+        </div>
 			</motion.section>
 
 			{/* Blog Section */}

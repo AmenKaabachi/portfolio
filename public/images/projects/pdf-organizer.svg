@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pdfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e94560;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="folderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CA771;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6bcf8e;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bgGrad)"/>
+  
+  <!-- Decorative grid pattern -->
+  <g opacity="0.1">
+    <line x1="0" y1="50" x2="800" y2="50" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="150" x2="800" y2="150" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="250" x2="800" y2="250" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#fff" stroke-width="1"/>
+    <line x1="0" y1="350" x2="800" y2="350" stroke="#fff" stroke-width="1"/>
+    <line x1="100" y1="0" x2="100" y2="400" stroke="#fff" stroke-width="1"/>
+    <line x1="200" y1="0" x2="200" y2="400" stroke="#fff" stroke-width="1"/>
+    <line x1="300" y1="0" x2="300" y2="400" stroke="#fff" stroke-width="1"/>
+    <line x1="400" y1="0" x2="400" y2="400" stroke="#fff" stroke-width="1"/>
+    <line x1="500" y1="0" x2="500" y2="400" stroke="#fff" stroke-width="1"/>
+    <line x1="600" y1="0" x2="600" y2="400" stroke="#fff" stroke-width="1"/>
+    <line x1="700" y1="0" x2="700" y2="400" stroke="#fff" stroke-width="1"/>
+  </g>
+  
+  <!-- Folder icon (back) -->
+  <g filter="url(#shadow)" transform="translate(200, 80)">
+    <path d="M0 40 L0 200 Q0 210 10 210 L190 210 Q200 210 200 200 L200 40 Q200 30 190 30 L100 30 L80 10 Q75 5 70 5 L10 5 Q0 5 0 15 Z" fill="url(#folderGrad)" opacity="0.6"/>
+  </g>
+  
+  <!-- PDF Document 1 -->
+  <g filter="url(#shadow)" transform="translate(250, 100)">
+    <rect x="0" y="0" width="100" height="130" rx="5" fill="#fff"/>
+    <rect x="0" y="0" width="100" height="30" rx="5" fill="url(#pdfGrad)"/>
+    <rect x="0" y="25" width="100" height="5" fill="url(#pdfGrad)"/>
+    <text x="50" y="20" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">PDF</text>
+    <!-- Document lines -->
+    <rect x="15" y="45" width="70" height="6" rx="2" fill="#ddd"/>
+    <rect x="15" y="58" width="55" height="6" rx="2" fill="#ddd"/>
+    <rect x="15" y="71" width="65" height="6" rx="2" fill="#ddd"/>
+    <rect x="15" y="84" width="45" height="6" rx="2" fill="#ddd"/>
+    <rect x="15" y="97" width="60" height="6" rx="2" fill="#ddd"/>
+    <rect x="15" y="110" width="50" height="6" rx="2" fill="#ddd"/>
+  </g>
+  
+  <!-- PDF Document 2 -->
+  <g filter="url(#shadow)" transform="translate(380, 120)">
+    <rect x="0" y="0" width="100" height="130" rx="5" fill="#fff"/>
+    <rect x="0" y="0" width="100" height="30" rx="5" fill="url(#pdfGrad)"/>
+    <rect x="0" y="25" width="100" height="5" fill="url(#pdfGrad)"/>
+    <text x="50" y="20" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">PDF</text>
+    <!-- Document lines -->
+    <rect x="15" y="45" width="60" height="6" rx="2" fill="#ddd"/>
+    <rect x="15" y="58" width="70" height="6" rx="2" fill="#ddd"/>
+    <rect x="15" y="71" width="50" height="6" rx="2" fill="#ddd"/>
+    <rect x="15" y="84" width="65" height="6" rx="2" fill="#ddd"/>
+    <rect x="15" y="97" width="55" height="6" rx="2" fill="#ddd"/>
+    <rect x="15" y="110" width="40" height="6" rx="2" fill="#ddd"/>
+  </g>
+  
+  <!-- Arrow indicating organization -->
+  <g transform="translate(510, 170)">
+    <path d="M0 15 L40 15 L40 5 L60 20 L40 35 L40 25 L0 25 Z" fill="url(#folderGrad)"/>
+  </g>
+  
+  <!-- Folder icon (organized destination) -->
+  <g filter="url(#shadow)" transform="translate(550, 100)">
+    <path d="M0 30 L0 150 Q0 160 10 160 L140 160 Q150 160 150 150 L150 30 Q150 20 140 20 L75 20 L60 5 Q55 0 50 0 L10 0 Q0 0 0 10 Z" fill="url(#folderGrad)"/>
+    <!-- Folder tab -->
+    <path d="M5 20 L50 20 L60 10 L55 5 L5 5 Z" fill="url(#folderGrad)" opacity="0.8"/>
+    <!-- Mini PDF icons in folder -->
+    <rect x="20" y="50" width="35" height="45" rx="3" fill="#fff" opacity="0.9"/>
+    <rect x="20" y="50" width="35" height="12" rx="3" fill="url(#pdfGrad)"/>
+    <rect x="60" y="60" width="35" height="45" rx="3" fill="#fff" opacity="0.9"/>
+    <rect x="60" y="60" width="35" height="12" rx="3" fill="url(#pdfGrad)"/>
+    <rect x="100" y="50" width="35" height="45" rx="3" fill="#fff" opacity="0.9"/>
+    <rect x="100" y="50" width="35" height="12" rx="3" fill="url(#pdfGrad)"/>
+  </g>
+  
+  <!-- Python logo hint -->
+  <g transform="translate(680, 300)">
+    <circle cx="30" cy="30" r="25" fill="#306998" opacity="0.8"/>
+    <circle cx="50" cy="50" r="25" fill="#FFD43B" opacity="0.8"/>
+    <text x="40" y="48" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">Py</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="350" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#fff" text-anchor="middle" opacity="0.9">PDF Organizer</text>
+  <text x="400" y="380" font-family="Arial, sans-serif" font-size="14" fill="#aaa" text-anchor="middle">Organize • Sort • Manage</text>
+</svg>
