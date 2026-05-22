@@ -2,70 +2,93 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Download,
-  GraduationCap,
-  Briefcase
-} from 'lucide-react';
+import { Download } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Resume() {
-  useLanguage();
+  const { t } = useLanguage();
 
   const education = [
     {
-      degree: "Bachelor's in Business Information Systems",
-      school: "University of Gafsa",
-      year: "2020-2023",
-      location: "Gafsa, Tunisia"
+      degree: t('educationISAMMDegree'),
+      school: t('educationISAMMSchool'),
+      year: t('educationISAMMYear'),
+      location: t('educationISAMMLocation')
+    },
+    {
+      degree: t('educationISAEGDegree'),
+      school: t('educationISAEGSchool'),
+      year: t('educationISAEGYear'),
+      location: t('educationISAEGLocation')
     }
   ];
 
   const experience = [
     {
-      title: "Full-Stack Developer",
-      company: "Freelance",
-      period: "2023 - Present",
-      location: "Gafsa, Tunisia",
-      description: [
-        "Developed web and mobile applications using React.js, Node.js, and Flutter",
-        "Built analytics platform for final year project with React.js and MySQL",
-        "Created various projects including chat applications and real-time systems"
+      title: t('experienceTitle'),
+      company: t('experienceCompany'),
+      period: t('experiencePeriod'),
+      location: t('experienceLocation'),
+      description: t('experiencePoints') as string[]
+    }
+  ];
+
+  const projects = [
+    {
+      title: "TaskFlow — Task Management Platform",
+      tech: "Next.js, TypeScript, PostgreSQL, Tailwind CSS",
+      points: [
+        "Developed a full-stack productivity application with authentication and task management",
+        "Implemented responsive UI components and optimized database queries",
+        "Built scalable REST APIs and role-based access features"
+      ]
+    },
+    {
+      title: "AI-Powered PDF Organizer",
+      tech: "Python, PyTorch, BERT, Streamlit",
+      points: [
+        "Built an AI-based document classification and organization platform",
+        "Implemented semantic similarity search using embeddings",
+        "Developed an interactive Streamlit interface for real-time document management"
+      ]
+    },
+    {
+      title: "Student Performance Prediction",
+      tech: "Python, Pandas, Scikit-learn",
+      points: [
+        "Analyzed academic datasets and trained machine learning models",
+        "Performed data preprocessing, feature engineering, and evaluation",
+        "Compared multiple ML algorithms to optimize prediction accuracy"
       ]
     }
   ];
 
   const technicalSkills = {
-    "Languages": ["Python", "Java", "C", "C#", "JavaScript", "PHP"],
-    "Frontend": ["HTML", "CSS", "Bootstrap", "Tailwind CSS", "React.js", "Next.js"],
-    "Backend": ["Express.js", "Node.js", "PHP"],
-    "Mobile": ["Java", "Flutter"],
-    "Database": ["SQL", "NoSQL", "MySQL"],
-    "Tools": ["Git", "REST APIs", "Responsive Design"]
+    "Programming Languages": "Python, JavaScript, TypeScript, Java, C, C#, SQL",
+    "Web Development": "React.js, Next.js, Node.js, Express.js, Tailwind CSS, REST APIs",
+    "Databases": "PostgreSQL, MySQL, MongoDB",
+    "AI & Data Science": "Scikit-learn, Pandas, NumPy, PyTorch, BERT, Data Analysis",
+    "Tools": "Git, GitHub, Docker, Linux, Postman"
   };
 
   const languages = [
     { name: "Arabic", level: "Native" },
     { name: "English", level: "Fluent" },
-    { name: "French", level: "C1" }
-  ];
-
-  const interests = [
-    "Web Development ,",
-    "Mobile Apps ,",
-    "Problem Solving",
+    { name: "French", level: "Proficient (TCF C1)" }
   ];
 
   return (
-    <div className="min-h-screen bg-background py-12 px-8 resume-container">
+    <div className="min-h-screen bg-background py-12 px-8 print:py-0 print:px-0 resume-container">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8 no-print">
+        {/* Actions Header */}
+        <div className="flex justify-between items-center mb-8 no-print">
+          <Link href="/">
+            <Button variant="outline">
+              &larr; Back to Portfolio
+            </Button>
+          </Link>
           <Button 
             onClick={() => window.print()} 
-            className="mb-6"
             size="lg"
           >
             <Download className="h-5 w-5 mr-2" />
@@ -73,153 +96,127 @@ export default function Resume() {
           </Button>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden resume-content">
-          {/* Header Section */}
-          <div className="bg-primary text-primary-foreground p-6 gradient-code resume-header">
-            <div className="text-center">
-              <h1 className="text-3xl font-bold mb-2">Amen KAABACHI</h1>
-              <p className="text-lg mb-3">Full-Stack Developer</p>
-              <div className="flex flex-wrap justify-center gap-4 text-sm contact-info">
-                <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  kaabachiamen@gmail.com
-                </div>
-                <div className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  +216 99841331
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4" />
-                  Gafsa, Tunisia
-                </div>
-              </div>
+        {/* Resume Content - ATS Friendly Format */}
+        <div className="bg-white dark:bg-gray-900 shadow-sm rounded-sm p-10 print:p-0 print:shadow-none print:border-none resume-content max-w-[800px] mx-auto border border-border">
+          
+          {/* Header */}
+          <header className="text-center mb-6 print:mb-2 pb-4 print:pb-1 border-b border-gray-300 dark:border-gray-700">
+            <h1 className="text-3xl print:text-2xl font-bold mb-1 print:mb-0 text-gray-900 dark:text-gray-100 uppercase tracking-wide">Amen Kaabachi</h1>
+            <p className="text-sm print:text-xs text-gray-700 dark:text-gray-300 mb-2 print:mb-0.5">Tunis, Tunisia | +216 99 841 331 | kaabachiamen@gmail.com</p>
+            <div className="text-sm print:text-xs font-medium text-gray-800 dark:text-gray-200">
+              <a href="https://www.linkedin.com/in/amenkaabachi/" target="_blank" rel="noreferrer" className="mx-1 hover:underline">LinkedIn</a> | <a href="https://github.com/amenkaabachi" target="_blank" rel="noreferrer" className="mx-1 hover:underline">GitHub</a> | <span className="mx-1">Portfolio</span>
             </div>
-          </div>
+            <p className="text-sm print:text-xs font-semibold text-primary mt-2 print:mt-1 uppercase tracking-wider">
+              Software Engineering Student | Full-Stack Developer | AI & Data Enthusiast
+            </p>
+          </header>
 
-          <div className="p-6 space-y-6 resume-body">
+          <div className="space-y-6 print:space-y-3 text-gray-800 dark:text-gray-200">
+            
             {/* Professional Summary */}
-            <section className="resume-section">
-              <h2 className="text-xl font-bold mb-3 text-foreground border-b-2 border-primary pb-1">
-                Professional Summary
+            <section>
+              <h2 className="text-lg print:text-sm font-bold uppercase tracking-wider border-b border-gray-300 dark:border-gray-700 mb-2 print:mb-1 pb-1 print:pb-0.5 text-gray-900 dark:text-gray-100">
+                Summary
               </h2>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                Dedicated Full-Stack Developer with expertise in building clean, scalable, and efficient 
-                web and mobile applications. Business Information Systems graduate with a passion for 
-                solving real-world problems through technology.
+              <p className="text-sm print:text-xs print:leading-snug leading-relaxed">
+                {t('professionalSummary')}
               </p>
             </section>
 
-            {/* Education & Experience in same row */}
-            <div className="resume-grid">
-              {/* Education */}
-              <section className="resume-section">
-                <h2 className="text-xl font-bold mb-3 text-foreground border-b-2 border-primary pb-1">
-                  <GraduationCap className="inline h-5 w-5 mr-1" />
-                  Education
-                </h2>
-                <div className="space-y-2">
-                  {education.map((edu, index) => (
-                    <div key={index} className="resume-card">
-                      <div className="flex justify-between items-start mb-1">
-                        <h3 className="font-semibold text-sm">{edu.degree}</h3>
-                        <span className="resume-badge">
-                          {edu.year}
-                        </span>
-                      </div>
-                      <p className="text-muted-foreground text-xs">{edu.school}</p>
-                      <p className="text-xs text-muted-foreground">{edu.location}</p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              {/* Experience */}
-              <section className="resume-section">
-                <h2 className="text-xl font-bold mb-3 text-foreground border-b-2 border-primary pb-1">
-                  <Briefcase className="inline h-5 w-5 mr-1" />
-                  Experience
-                </h2>
-                <div className="space-y-2">
-                  {experience.map((exp, index) => (
-                    <div key={index} className="resume-card">
-                      <div className="flex justify-between items-start mb-1">
-                        <div>
-                          <h3 className="font-semibold text-sm">{exp.title}</h3>
-                          <p className="text-muted-foreground text-xs">{exp.company}</p>
-                        </div>
-                        <div className="text-right">
-                          <span className="resume-badge">
-                            {exp.period}
-                          </span>
-                        </div>
-                      </div>
-                      <ul className="list-disc list-inside space-y-0 text-xs text-muted-foreground mt-2">
-                        {exp.description.slice(0, 2).map((desc, i) => (
-                          <li key={i}>{desc}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            </div>
-
-            {/* Technical Skills - Compact Layout */}
-            <section className="resume-section">
-              <h2 className="text-xl font-bold mb-3 text-foreground border-b-2 border-primary pb-1">
-                Technical Skills
+            {/* Education */}
+            <section>
+              <h2 className="text-lg print:text-sm font-bold uppercase tracking-wider border-b border-gray-300 dark:border-gray-700 mb-2 print:mb-1 pb-1 print:pb-0.5 text-gray-900 dark:text-gray-100">
+                Education
               </h2>
-              <div className="skills-compact">
-                {Object.entries(technicalSkills).map(([category, skills]) => (
-                  <div key={category} className="resume-card">
-                    <h3 className="font-semibold text-xs mb-1 text-primary">{category}</h3>
-                    <div className="flex flex-wrap gap-1">
-                      {skills.map((skill) => (
-                        <span key={skill} className="resume-badge text-xs">
-                          {skill}
-                        </span>
-                      ))}
+              <div className="space-y-3 print:space-y-1">
+                {education.map((edu, index) => (
+                  <div key={index}>
+                    <div className="flex justify-between items-start">
+                      <h3 className="font-semibold text-sm print:text-xs">{edu.school}</h3>
+                      <span className="text-sm print:text-[11px] font-medium">{edu.year}</span>
+                    </div>
+                    <div className="flex justify-between items-start mt-0.5 print:mt-0">
+                      <p className="text-sm print:text-[11px] italic">{edu.degree}</p>
+                      <span className="text-sm print:text-[11px] text-gray-600 dark:text-gray-400">{edu.location}</span>
                     </div>
                   </div>
                 ))}
               </div>
             </section>
 
-            {/* Languages & Interests - Side by Side */}
-            <div className="side-sections">
-              {/* Languages */}
-              <section className="resume-section">
-                <h2 className="text-xl font-bold mb-3 text-foreground border-b-2 border-primary pb-1">
-                  Languages
-                </h2>
-                <div className="resume-card">
-                  <div className="space-y-2">
-                    {languages.map((lang, index) => (
-                      <div key={index} className="flex justify-between items-center">
-                        <span className="font-medium text-sm">{lang.name}</span>
-                        <span className="resume-badge">{lang.level}</span>
-                      </div>
-                    ))}
+            {/* Experience */}
+            <section>
+              <h2 className="text-lg print:text-sm font-bold uppercase tracking-wider border-b border-gray-300 dark:border-gray-700 mb-2 print:mb-1 pb-1 print:pb-0.5 text-gray-900 dark:text-gray-100">
+                Experience
+              </h2>
+              <div className="space-y-4 print:space-y-1.5">
+                {experience.map((exp, index) => (
+                  <div key={index}>
+                    <div className="flex justify-between items-start">
+                      <h3 className="font-semibold text-sm print:text-xs">{exp.title} — {exp.company}</h3>
+                      <span className="text-sm print:text-[11px] font-medium">{exp.period}</span>
+                    </div>
+                    <p className="text-sm print:text-[11px] text-gray-600 dark:text-gray-400 mb-1 print:mb-0.5">{exp.location}</p>
+                    <ul className="list-disc list-outside ml-4 space-y-1 print:space-y-0 text-sm print:text-[11px]">
+                      {exp.description.map((desc, i) => (
+                        <li key={i} className="pl-1 print:pl-0">{desc}</li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-              </section>
+                ))}
+              </div>
+            </section>
 
-              {/* Interests */}
-              <section className="resume-section">
-                <h2 className="text-xl font-bold mb-3 text-foreground border-b-2 border-primary pb-1">
-                  Interests
-                </h2>
-                <div className="resume-card">
-                  <div className="interests-list">
-                    {interests.map((interest) => (
-                      <span key={interest} className="interest-item">
-                        {interest}
-                      </span>
-                    ))}
+            {/* Projects */}
+            <section>
+              <h2 className="text-lg print:text-sm font-bold uppercase tracking-wider border-b border-gray-300 dark:border-gray-700 mb-2 print:mb-1 pb-1 print:pb-0.5 text-gray-900 dark:text-gray-100">
+                Projects
+              </h2>
+              <div className="space-y-4 print:space-y-1.5">
+                {projects.map((project, index) => (
+                  <div key={index}>
+                    <h3 className="font-semibold text-sm print:text-xs">{project.title}</h3>
+                    <p className="text-sm print:text-[11px] italic mb-1 print:mb-0.5 text-gray-600 dark:text-gray-400">{project.tech}</p>
+                    <ul className="list-disc list-outside ml-4 space-y-1 print:space-y-0 text-sm print:text-[11px]">
+                      {project.points.map((point, i) => (
+                        <li key={i} className="pl-1 print:pl-0">{point}</li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-              </section>
-            </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Technical Skills */}
+            <section>
+              <h2 className="text-lg print:text-sm font-bold uppercase tracking-wider border-b border-gray-300 dark:border-gray-700 mb-2 print:mb-1 pb-1 print:pb-0.5 text-gray-900 dark:text-gray-100">
+                Skills
+              </h2>
+              <div className="space-y-1.5 print:space-y-0 text-sm print:text-[11px]">
+                {Object.entries(technicalSkills).map(([category, skills]) => (
+                  <div key={category} className="flex">
+                    <span className="font-semibold w-40 print:w-32 flex-shrink-0">{category}:</span>
+                    <span>{skills}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Languages */}
+            <section>
+              <h2 className="text-lg print:text-sm font-bold uppercase tracking-wider border-b border-gray-300 dark:border-gray-700 mb-2 print:mb-1 pb-1 print:pb-0.5 text-gray-900 dark:text-gray-100">
+                Languages
+              </h2>
+              <div className="text-sm print:text-[11px] flex gap-6 print:gap-4">
+                {languages.map((lang, index) => (
+                  <span key={index} className="flex gap-1">
+                    <span className="font-semibold">{lang.name}:</span>
+                    <span>{lang.level}</span>
+                  </span>
+                ))}
+              </div>
+            </section>
+            
           </div>
         </div>
       </div>

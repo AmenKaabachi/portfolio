@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Amen KAABACHI - Full-Stack Developer",
-  description: "Portfolio of Amen KAABACHI, Full-Stack Developer from Gafsa, Tunisia. Specialized in web and mobile applications.",
+  title: "Amen KAABACHI - Software Engineering Student | Full-Stack Developer",
+  description: "Portfolio of Amen KAABACHI, Software Engineering Student and Full-Stack Developer from Tunis, Tunisia. Building modern web applications, analytics platforms, and AI-powered tools.",
   icons: {
     icon: [
       {
@@ -37,6 +37,9 @@ export const metadata: Metadata = {
     },
   },
   manifest: '/manifest.json',
+};
+
+export const viewport = {
   themeColor: '#4CA771',
 };
 

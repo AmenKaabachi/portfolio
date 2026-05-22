@@ -15,7 +15,10 @@ import {
   Languages,
   Menu,
   X,
-  BookOpen
+  BookOpen,
+  Briefcase,
+  GraduationCap,
+  MessageSquare
 } from 'lucide-react';
 import Flag from 'react-world-flags';
 import Link from 'next/link';
@@ -45,61 +48,55 @@ export default function Sidebar() {
     };
   }, [isOpen]);
 
-  // Intersection Observer for active section highlighting
+  // Scroll listener for active section highlighting
   useEffect(() => {
-    const sections = document.querySelectorAll('section[id]');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Find the section that's most visible
-        let mostVisibleSection = '';
-        let maxVisibilityRatio = 0;
-
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > maxVisibilityRatio) {
-            maxVisibilityRatio = entry.intersectionRatio;
-            mostVisibleSection = entry.target.id;
-          }
-        });
-
-        // If no section is intersecting significantly, check scroll position
-        if (maxVisibilityRatio < 0.3) {
-          const scrollPosition = window.scrollY + window.innerHeight / 2;
-          const sectionIds = ['skills', 'projects', 'blog'];
-          
-          for (let i = sectionIds.length - 1; i >= 0; i--) {
-            const element = document.getElementById(sectionIds[i]);
-            if (element && scrollPosition >= element.offsetTop) {
-              mostVisibleSection = sectionIds[i];
-              break;
-            }
+    const handleScroll = () => {
+      const sections = ['about', 'projects', 'skills', 'experience', 'education', 'blog', 'contact'];
+      
+      // Get current scroll position with an offset (half the window height works well)
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+      
+      let currentSection = '';
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sectionId = sections[i];
+        const element = document.getElementById(sectionId);
+        
+        if (element) {
+          // If the scroll position has passed the top of this section
+          if (scrollPosition >= element.offsetTop) {
+            currentSection = sectionId;
+            break;
           }
         }
-
-        // Set active section, default to empty string for about section
-        if (mostVisibleSection && ['skills', 'projects', 'blog'].includes(mostVisibleSection)) {
-          setActiveSection(mostVisibleSection);
-        } else if (window.scrollY < 200) {
-          setActiveSection(''); // About section (top of page)
-        }
-      },
-      {
-        threshold: [0.1, 0.3, 0.5, 0.7],
-        rootMargin: '-20% 0px -20% 0px' // Only trigger when section is well into view
       }
-    );
+      
+      // If we're at the very top, make sure 'about' is active (which maps to '')
+      if (window.scrollY < 100 || currentSection === 'about') {
+        setActiveSection('');
+      } else {
+        setActiveSection(currentSection);
+      }
+    };
 
-    sections.forEach((section) => observer.observe(section));
+    // Call once to set initial state
+    handleScroll();
 
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
     return () => {
-      sections.forEach((section) => observer.unobserve(section));
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   const navigation = [
     { name: tString('about'), href: '/', icon: User },
-    { name: tString('skills'), href: '#skills', icon: Code },
     { name: tString('projects'), href: '#projects', icon: FolderOpen },
+    { name: tString('skills'), href: '#skills', icon: Code },
+    { name: tString('experience'), href: '#experience', icon: Briefcase },
+    { name: tString('education'), href: '#education', icon: GraduationCap },
     { name: tString('blog'), href: '#blog', icon: BookOpen },
+    { name: tString('contact'), href: '#contact', icon: MessageSquare },
     { name: tString('resume'), href: '/resume', icon: FileText },
   ];
 
